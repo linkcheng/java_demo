@@ -1,21 +1,24 @@
 package com.xinyongfei.demo;
 
+import com.xinyongfei.demo.inherit.AbstractPerson;
 import com.xinyongfei.demo.inherit.Person;
 import com.xinyongfei.demo.inherit.Student;
 import com.xinyongfei.demo.inherit.Teacher;
 import com.xinyongfei.demo.vote.Voter;
 
-import java.security.PublicKey;
-
 
 public class Main {
-
     static {
         age = 10;
+        System.out.println("static block");
     }
 
     static int age;
     static int a = 1;
+
+    {
+        System.out.println("non-static block");
+    }
 
     public static void method(int num) {
         System.out.println(age);
@@ -36,7 +39,7 @@ public class Main {
         a.run();
     }
 
-    public static void test2(String[] args) {
+    public static void test2() {
 //        method(1);   7681636
 //        test1();
 
@@ -61,7 +64,15 @@ public class Main {
 
     }
 
-    public static void main(String[] args) {
+    public static void swap(Teacher a, Teacher b) {
+        Teacher tmp = a;
+        a = b;
+        b = tmp;
+        System.out.println("In swap " + a.name);
+        System.out.println("In swap " + b.name);
+    }
+
+    public static void test3() {
         Person person1 = new Student();
         Person person2 = new Teacher();
 
@@ -71,5 +82,31 @@ public class Main {
         Student stu = (Student) person1;
         stu.study("math");
         System.out.println(person2 instanceof Teacher);
+
+        // swap
+        Teacher x = new Teacher("张三");
+        Teacher y = new Teacher("李四");
+        System.out.println(x.name);
+        System.out.println(y.name);
+        swap(x, y);
+        System.out.println(x.name);
+        System.out.println(y.name);
+    }
+
+    public static void test4() {
+        AbstractPerson ap = new Teacher();
+
+        ap.say("I am a teacher");
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println("start");
+        new Main();
+
+//        test1();
+//        test2();
+//        test3();
+        test4();
     }
 }
