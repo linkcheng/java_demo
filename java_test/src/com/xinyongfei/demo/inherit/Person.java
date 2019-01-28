@@ -9,6 +9,14 @@ public class Person extends AbstractPerson{
         this.name = name;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void say(String word) {
         System.out.println("In Person word: "+word);
     }

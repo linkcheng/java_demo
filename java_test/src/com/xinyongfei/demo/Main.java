@@ -6,6 +6,8 @@ import com.xinyongfei.demo.inherit.Student;
 import com.xinyongfei.demo.inherit.Teacher;
 import com.xinyongfei.demo.vote.Voter;
 
+import java.util.ArrayList;
+
 
 public class Main {
     static {
@@ -99,6 +101,21 @@ public class Main {
         ap.say("I am a teacher");
     }
 
+    public static void test5() {
+        ArrayList<Teacher> staff = new ArrayList<>(10);
+
+        staff.add(new Teacher("T1", 10000));
+        staff.add(new Teacher("T2", 12000));
+        staff.add(new Teacher("T3", 15000));
+
+        for (Teacher t : staff) {
+            t.raiseSalary(5);
+        }
+
+        for (Teacher t : staff) {
+            System.out.println(t.toString());
+        }
+    }
 
     public static void main(String[] args) {
         System.out.println("start");
@@ -107,6 +124,7 @@ public class Main {
 //        test1();
 //        test2();
 //        test3();
-        test4();
+//        test4();
+        test5();
     }
 }
