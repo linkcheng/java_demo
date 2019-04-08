@@ -11,6 +11,10 @@ public class Student extends Person{
         super(name);
     }
 
+    public Student(String name, Gender gender) {
+        super(name, gender);
+    }
+
     public void say(String word) {
         System.out.println("In Student word: "+word);
     }

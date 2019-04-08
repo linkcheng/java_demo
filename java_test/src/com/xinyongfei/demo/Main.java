@@ -1,9 +1,6 @@
 package com.xinyongfei.demo;
 
-import com.xinyongfei.demo.inherit.AbstractPerson;
-import com.xinyongfei.demo.inherit.Person;
-import com.xinyongfei.demo.inherit.Student;
-import com.xinyongfei.demo.inherit.Teacher;
+import com.xinyongfei.demo.inherit.*;
 import com.xinyongfei.demo.vote.Voter;
 
 import java.util.ArrayList;
@@ -87,9 +84,11 @@ public class Main {
 
         // swap
         Teacher x = new Teacher("张三");
-        Teacher y = new Teacher("李四");
+        Teacher y = new Teacher("李四", Gender.Male);
         System.out.println(x.name);
+        System.out.println(x.gender);
         System.out.println(y.name);
+        System.out.println(y.gender);
         swap(x, y);
         System.out.println(x.name);
         System.out.println(y.name);
@@ -123,8 +122,8 @@ public class Main {
 
 //        test1();
 //        test2();
-//        test3();
+        test3();
 //        test4();
-        test5();
+//        test5();
     }
 }
