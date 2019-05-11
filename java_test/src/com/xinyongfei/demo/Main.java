@@ -116,14 +116,34 @@ public class Main {
         }
     }
 
+    public static void test6() {
+//        MyThread mt1 = new MyThread("mt1");
+//        MyThread mt2 = new MyThread("mt2");
+//        mt1.start();
+//        mt2.start();
+
+        MySecondThread mst1 = new MySecondThread("mst1");
+        Thread t1 = new Thread(mst1, "窗口1"); // 静态代理
+        Thread t2 = new Thread(mst1, "窗口2");
+        Thread t3 = new Thread(mst1, "窗口3");
+        t1.start();
+        t2.start();
+        t3.start();
+
+//        for (int i=0; i<10; i++) {
+//            System.out.println("main-"+i);
+//        }
+    }
+
     public static void main(String[] args) {
         System.out.println("start");
-        new Main();
+//        new Main();
 
 //        test1();
 //        test2();
-        test3();
+//        test3();
 //        test4();
 //        test5();
+        test6();
     }
 }
