@@ -9,21 +9,28 @@ import java.net.Socket;
 
 public class Client {
     public static void main(String[] args) {
+        Client c = new Client();
+        c.start();
+
+    }
+
+    public void start() {
         Socket s = null;
         try {
             // 1. 建立连接
             s = new Socket("127.0.0.1", 8080);
-            // 2. 发送消息写字符串建议使用 PrintWriter
+            // 2. 创建接收器，接受来自服务端的消息
+            Receiver receiver = new Receiver(s);
+            Thread t = new Thread(receiver);
+            t.setDaemon(true);
+            t.start();
+
+            // 3. 发送消息，建议使用 PrintWriter
             PrintWriter out = new PrintWriter(s.getOutputStream(), true);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            String str = null;
-            while ((str = reader.readLine()) != null) {
+            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+            String str;
+            while ((str = input.readLine()) != null) {
                 out.println(str);
-
-                // 3. 接收消息
-                BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
-                System.out.println("收到服务端消息: " + br.readLine());
-
                 if(str.equals("bye")) {
                     break;
                 }
@@ -39,6 +46,28 @@ public class Client {
                 }
             }
         }
+    }
 
+    class Receiver implements Runnable {
+        Socket socket;
+        BufferedReader in;
+
+        Receiver(Socket s) throws IOException {
+            socket = s;
+            in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+        }
+
+        @Override
+        public void run() {
+            String str;
+            while (true) {
+                try {
+                    if ((str=in.readLine())==null) break;
+                } catch (IOException e) {
+                    break;
+                }
+                System.out.println(str);
+            }
+        }
     }
 }

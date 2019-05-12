@@ -6,63 +6,75 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Server {
-    public static void main(String[] args) {
+    private List<ServerThread> clients = new ArrayList<>();
+
+    public static void main(String[] args) throws IOException {
         Server s = new Server();
         s.start();
     }
 
     public void start() {
-        ServerSocket ss = null;
-        Socket s = null;
+        // 1. 创建 ServerSocket
+        ServerSocket ss;
         try {
-            // 1. 创建 ServerSocket
             ss = new ServerSocket(8080);
-            while (true) {
-                // 2. 监听客户端
-                s = ss.accept();
-                ServerThread st = new ServerThread(s);
-                Thread t = new Thread(st);
-                t.start();
-            }
-
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (ss != null) {
-                try {
-                    ss.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            return;
+        }
+
+        do {
+            // 2. 监听客户端
+            Socket s;
+            ServerThread st;
+            try {
+                s = ss.accept();
+                st = new ServerThread(s);
+            } catch (IOException e) {
+                continue;
             }
-            if (s != null) {
-                try {
-                    s.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+
+            send(st.name+":【上线了】");
+            clients.add(st);
+
+            Thread t = new Thread(st);
+            t.start();
+        } while (!clients.isEmpty());
+
+        try {
+            ss.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 对所有人发送消息
+     * @param msg
+     */
+    public void send(String msg) {
+        for(ServerThread c : clients) {
+            c.out.println(msg);
         }
     }
 
     class ServerThread implements Runnable {
         Socket socket;
         String name;
-        BufferedReader in = null;
-        PrintWriter out = null;
+        BufferedReader in;
+        PrintWriter out;
 
-        ServerThread(Socket s) {
+        ServerThread(Socket s) throws IOException {
             socket = s;
             name = "客户端 "+s.getInetAddress().getHostName()+":"+socket.getPort();
-            System.out.println(name+" 上线了");
-            try {
-                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                out = new PrintWriter(socket.getOutputStream(), true);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            System.out.println(name+":【上线了】");
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out = new PrintWriter(socket.getOutputStream(), true);
+
         }
 
         @Override
@@ -70,20 +82,30 @@ public class Server {
             String str = null;
             while(true){
                 try {
-                    if (!((str=in.readLine())!=null)) break;
+                    if ((str=in.readLine())==null) break;
+                    System.out.println(name+": "+str);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println(name+" 发来消息: "+str);
+
                 // 3. 返回客户端消息
 
-                if(out != null) {
+                if(out != null && str != null) {
                     out.println(str);
+                    send(name+": "+str);
                     if(str.equals("bye")){
                         break;
                     }
                 }
             }
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            clients.remove(this);
+            System.out.println(name+":【下线了】");
+            send(name+":【下线了】");
         }
     }
 }
