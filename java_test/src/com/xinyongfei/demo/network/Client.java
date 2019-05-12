@@ -11,7 +11,6 @@ public class Client {
     public static void main(String[] args) {
         Client c = new Client();
         c.start();
-
     }
 
     public void start() {
@@ -20,8 +19,7 @@ public class Client {
             // 1. 建立连接
             s = new Socket("127.0.0.1", 8080);
             // 2. 创建接收器，接受来自服务端的消息
-            Receiver receiver = new Receiver(s);
-            Thread t = new Thread(receiver);
+            Thread t = new Thread(new Receiver(s));
             t.setDaemon(true);
             t.start();
 
@@ -63,10 +61,10 @@ public class Client {
             while (true) {
                 try {
                     if ((str=in.readLine())==null) break;
+                    System.out.println(str);
                 } catch (IOException e) {
                     break;
                 }
-                System.out.println(str);
             }
         }
     }

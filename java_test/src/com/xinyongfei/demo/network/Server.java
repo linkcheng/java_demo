@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Server {
-    private List<ServerThread> clients = new ArrayList<>();
+    private List<ServerClient> clients = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         Server s = new Server();
@@ -27,29 +27,25 @@ public class Server {
             return;
         }
 
-        do {
+        while(true) {
             // 2. 监听客户端
             Socket s;
-            ServerThread st;
             try {
                 s = ss.accept();
-                st = new ServerThread(s);
+                Thread t = new Thread(new ServerClient(s));
+                t.start();
             } catch (IOException e) {
-                continue;
+                e.printStackTrace();
+                break;
             }
-
-            send(st.name+":【上线了】");
-            clients.add(st);
-
-            Thread t = new Thread(st);
-            t.start();
-        } while (!clients.isEmpty());
+        }
 
         try {
             ss.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     /**
@@ -57,24 +53,26 @@ public class Server {
      * @param msg
      */
     public void send(String msg) {
-        for(ServerThread c : clients) {
+        System.out.println(msg);
+        for(ServerClient c : clients) {
             c.out.println(msg);
         }
     }
 
-    class ServerThread implements Runnable {
-        Socket socket;
+    class ServerClient implements Runnable {
         String name;
+        Socket socket;
         BufferedReader in;
         PrintWriter out;
 
-        ServerThread(Socket s) throws IOException {
+        ServerClient(Socket s) throws IOException {
             socket = s;
-            name = "客户端 "+s.getInetAddress().getHostName()+":"+socket.getPort();
-            System.out.println(name+":【上线了】");
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            out = new PrintWriter(s.getOutputStream(), true);
 
+            clients.add(this);
+            name = "客户端 "+s.getInetAddress().getHostName()+":"+s.getPort();
+            send(name+":【上线了】");
         }
 
         @Override
@@ -83,19 +81,14 @@ public class Server {
             while(true){
                 try {
                     if ((str=in.readLine())==null) break;
-                    System.out.println(name+": "+str);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                // 3. 返回客户端消息
-
-                if(out != null && str != null) {
-                    out.println(str);
-                    send(name+": "+str);
-                    if(str.equals("bye")){
-                        break;
-                    }
+                // 发送消息
+                send(name+": "+str);
+                if(str.equals("bye")){
+                    break;
                 }
             }
             try {
@@ -103,8 +96,8 @@ public class Server {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             clients.remove(this);
-            System.out.println(name+":【下线了】");
             send(name+":【下线了】");
         }
     }
