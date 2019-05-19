@@ -26,7 +26,18 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
-  </dependencies>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <!--
+      tomcat 容器有 api 防止运行时 冲突
+      provided ：编译、测试 classpath 有效 运行无效
+      -->
+      <scope>provided</scope>
+  </dependency>
+
+</dependencies>
 
   <build>
     <finalName>maven-web</finalName>
