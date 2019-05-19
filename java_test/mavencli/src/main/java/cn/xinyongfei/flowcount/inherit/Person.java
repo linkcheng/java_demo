@@ -1,4 +1,4 @@
-package com.xinyongfei.demo.inherit;
+package cn.xinyongfei.flowcount.inherit;
 
 public class Person extends AbstractPerson{
     public Person() {

@@ -1,6 +1,4 @@
-package com.xinyongfei.demo.inherit;
-
-import javax.crypto.interfaces.PBEKey;
+package cn.xinyongfei.flowcount.inherit;
 
 public class Student extends Person{
     public Student() {

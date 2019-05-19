@@ -1,7 +1,7 @@
-package com.xinyongfei.demo;
+package cn.xinyongfei.flowcount;
 
-import com.xinyongfei.demo.inherit.*;
-import com.xinyongfei.demo.vote.Voter;
+import cn.xinyongfei.flowcount.inherit.*;
+import cn.xinyongfei.flowcount.vote.Voter;
 
 import java.util.ArrayList;
 
@@ -63,8 +63,8 @@ public class Main {
 
     }
 
-    public static void swap(Teacher a, Teacher b) {
-        Teacher tmp = a;
+    public static void swap(cn.xinyongfei.flowcount.inherit.Teacher a, cn.xinyongfei.flowcount.inherit.Teacher b) {
+        cn.xinyongfei.flowcount.inherit.Teacher tmp = a;
         a = b;
         b = tmp;
         System.out.println("In swap " + a.name);
@@ -72,19 +72,19 @@ public class Main {
     }
 
     public static void test3() {
-        Person person1 = new Student();
-        Person person2 = new Teacher();
+        cn.xinyongfei.flowcount.inherit.Person person1 = new cn.xinyongfei.flowcount.inherit.Student();
+        cn.xinyongfei.flowcount.inherit.Person person2 = new cn.xinyongfei.flowcount.inherit.Teacher();
 
         person1.say("student");
         person2.say("teacher");
 
-        Student stu = (Student) person1;
+        cn.xinyongfei.flowcount.inherit.Student stu = (cn.xinyongfei.flowcount.inherit.Student) person1;
         stu.study("math");
-        System.out.println(person2 instanceof Teacher);
+        System.out.println(person2 instanceof cn.xinyongfei.flowcount.inherit.Teacher);
 
         // swap
-        Teacher x = new Teacher("张三");
-        Teacher y = new Teacher("李四", Gender.Male);
+        cn.xinyongfei.flowcount.inherit.Teacher x = new cn.xinyongfei.flowcount.inherit.Teacher("张三");
+        cn.xinyongfei.flowcount.inherit.Teacher y = new cn.xinyongfei.flowcount.inherit.Teacher("李四", cn.xinyongfei.flowcount.inherit.Gender.Male);
         System.out.println(x.name);
         System.out.println(x.gender);
         System.out.println(y.name);
@@ -95,23 +95,23 @@ public class Main {
     }
 
     public static void test4() {
-        AbstractPerson ap = new Teacher();
+        cn.xinyongfei.flowcount.inherit.AbstractPerson ap = new cn.xinyongfei.flowcount.inherit.Teacher();
 
         ap.say("I am a teacher");
     }
 
     public static void test5() {
-        ArrayList<Teacher> staff = new ArrayList<>(10);
+        ArrayList<cn.xinyongfei.flowcount.inherit.Teacher> staff = new ArrayList<cn.xinyongfei.flowcount.inherit.Teacher>(10);
 
-        staff.add(new Teacher("T1", 10000));
-        staff.add(new Teacher("T2", 12000));
-        staff.add(new Teacher("T3", 15000));
+        staff.add(new cn.xinyongfei.flowcount.inherit.Teacher("T1", 10000));
+        staff.add(new cn.xinyongfei.flowcount.inherit.Teacher("T2", 12000));
+        staff.add(new cn.xinyongfei.flowcount.inherit.Teacher("T3", 15000));
 
-        for (Teacher t : staff) {
+        for (cn.xinyongfei.flowcount.inherit.Teacher t : staff) {
             t.raiseSalary(5);
         }
 
-        for (Teacher t : staff) {
+        for (cn.xinyongfei.flowcount.inherit.Teacher t : staff) {
             System.out.println(t.toString());
         }
     }
@@ -122,7 +122,7 @@ public class Main {
 //        mt1.start();
 //        mt2.start();
 
-        MySecondThread mst1 = new MySecondThread("mst1");
+        cn.xinyongfei.flowcount.MySecondThread mst1 = new cn.xinyongfei.flowcount.MySecondThread("mst1");
         Thread t1 = new Thread(mst1, "窗口1"); // 静态代理
         Thread t2 = new Thread(mst1, "窗口2");
         Thread t3 = new Thread(mst1, "窗口3");

@@ -1,6 +1,4 @@
-package com.xinyongfei.demo.inherit;
-
-import java.time.LocalDate;
+package cn.xinyongfei.flowcount.inherit;
 
 public class Teacher extends Person{
     private double salary;

@@ -1,4 +1,4 @@
-package com.xinyongfei.demo;
+package cn.xinyongfei.flowcount;
 
 public class Animal {
     String name;

@@ -1,4 +1,4 @@
-package com.xinyongfei.demo.network;
+package cn.xinyongfei.flowcount.network;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Server {
-    private List<ServerClient> clients = new ArrayList<>();
+    private List<ServerClient> clients = new ArrayList<ServerClient>();
 
     public static void main(String[] args) throws IOException {
         Server s = new Server();
