@@ -1,4 +1,4 @@
-package cn.xinyongfei.flowcount;
+package cn.xyf.flowcount;
 
 public class MyThread extends Thread{
     int count = 10;

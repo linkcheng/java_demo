@@ -1,8 +1,8 @@
-package cn.xinyongfei.flowcount.inherit;
+package cn.xyf.flowcount.inherit;
 
 public abstract class AbstractPerson {
     public String name;
-    public cn.xinyongfei.flowcount.inherit.Gender gender;
+    public cn.xyf.flowcount.inherit.Gender gender;
 
     public abstract void say(String word);
 }

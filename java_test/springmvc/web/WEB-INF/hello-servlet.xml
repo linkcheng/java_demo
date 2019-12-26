@@ -15,13 +15,13 @@
         http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
-    <context:component-scan base-package="cn.xinyongfei.flowcount.springmvc.controller" />
+    <context:component-scan base-package="cn.xyf.flowcount.springmvc.controller" />
     
     <!--映射机制-->
     <!--<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />-->
     <!--处理controller-->
-    <!--<bean name="/hello.action" class="cn.xinyongfei.flowcount.springmvc.controller.HelloController" />-->
+    <!--<bean name="/hello.action" class="cn.xyf.flowcount.springmvc.controller.HelloController" />-->
 
     <!-- 扫描controller下的组件 -->
-    <!--<context:component-scan base-package="cn.xinyongfei.flowcount.springmvc.controller"/>-->
+    <!--<context:component-scan base-package="cn.xyf.flowcount.springmvc.controller"/>-->
 </beans>

@@ -1,4 +1,4 @@
-package cn.xinyongfei.flowcount.vote;
+package cn.xyf.flowcount.vote;
 
 public class Voter {
     static final int TOTAL = 100;

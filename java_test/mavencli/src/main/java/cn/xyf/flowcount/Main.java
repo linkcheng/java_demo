@@ -1,7 +1,7 @@
-package cn.xinyongfei.flowcount;
+package cn.xyf.flowcount;
 
-import cn.xinyongfei.flowcount.inherit.*;
-import cn.xinyongfei.flowcount.vote.Voter;
+import cn.xyf.flowcount.inherit.*;
+import cn.xyf.flowcount.vote.Voter;
 import sun.jvm.hotspot.runtime.Bytes;
 
 import java.io.UnsupportedEncodingException;
@@ -66,8 +66,8 @@ public class Main {
 
     }
 
-    public static void swap(cn.xinyongfei.flowcount.inherit.Teacher a, cn.xinyongfei.flowcount.inherit.Teacher b) {
-        cn.xinyongfei.flowcount.inherit.Teacher tmp = a;
+    public static void swap(cn.xyf.flowcount.inherit.Teacher a, cn.xyf.flowcount.inherit.Teacher b) {
+        cn.xyf.flowcount.inherit.Teacher tmp = a;
         a = b;
         b = tmp;
         System.out.println("In swap " + a.name);
@@ -75,19 +75,19 @@ public class Main {
     }
 
     public static void test3() {
-        cn.xinyongfei.flowcount.inherit.Person person1 = new cn.xinyongfei.flowcount.inherit.Student();
-        cn.xinyongfei.flowcount.inherit.Person person2 = new cn.xinyongfei.flowcount.inherit.Teacher();
+        cn.xyf.flowcount.inherit.Person person1 = new cn.xyf.flowcount.inherit.Student();
+        cn.xyf.flowcount.inherit.Person person2 = new cn.xyf.flowcount.inherit.Teacher();
 
         person1.say("student");
         person2.say("teacher");
 
-        cn.xinyongfei.flowcount.inherit.Student stu = (cn.xinyongfei.flowcount.inherit.Student) person1;
+        cn.xyf.flowcount.inherit.Student stu = (cn.xyf.flowcount.inherit.Student) person1;
         stu.study("math");
-        System.out.println(person2 instanceof cn.xinyongfei.flowcount.inherit.Teacher);
+        System.out.println(person2 instanceof cn.xyf.flowcount.inherit.Teacher);
 
         // swap
-        cn.xinyongfei.flowcount.inherit.Teacher x = new cn.xinyongfei.flowcount.inherit.Teacher("张三");
-        cn.xinyongfei.flowcount.inherit.Teacher y = new cn.xinyongfei.flowcount.inherit.Teacher("李四", cn.xinyongfei.flowcount.inherit.Gender.Male);
+        cn.xyf.flowcount.inherit.Teacher x = new cn.xyf.flowcount.inherit.Teacher("张三");
+        cn.xyf.flowcount.inherit.Teacher y = new cn.xyf.flowcount.inherit.Teacher("李四", cn.xyf.flowcount.inherit.Gender.Male);
         System.out.println(x.name);
         System.out.println(x.gender);
         System.out.println(y.name);
@@ -98,23 +98,23 @@ public class Main {
     }
 
     public static void test4() {
-        cn.xinyongfei.flowcount.inherit.AbstractPerson ap = new cn.xinyongfei.flowcount.inherit.Teacher();
+        cn.xyf.flowcount.inherit.AbstractPerson ap = new cn.xyf.flowcount.inherit.Teacher();
 
         ap.say("I am a teacher");
     }
 
     public static void test5() {
-        ArrayList<cn.xinyongfei.flowcount.inherit.Teacher> staff = new ArrayList<cn.xinyongfei.flowcount.inherit.Teacher>(10);
+        ArrayList<cn.xyf.flowcount.inherit.Teacher> staff = new ArrayList<cn.xyf.flowcount.inherit.Teacher>(10);
 
-        staff.add(new cn.xinyongfei.flowcount.inherit.Teacher("T1", 10000));
-        staff.add(new cn.xinyongfei.flowcount.inherit.Teacher("T2", 12000));
-        staff.add(new cn.xinyongfei.flowcount.inherit.Teacher("T3", 15000));
+        staff.add(new cn.xyf.flowcount.inherit.Teacher("T1", 10000));
+        staff.add(new cn.xyf.flowcount.inherit.Teacher("T2", 12000));
+        staff.add(new cn.xyf.flowcount.inherit.Teacher("T3", 15000));
 
-        for (cn.xinyongfei.flowcount.inherit.Teacher t : staff) {
+        for (cn.xyf.flowcount.inherit.Teacher t : staff) {
             t.raiseSalary(5);
         }
 
-        for (cn.xinyongfei.flowcount.inherit.Teacher t : staff) {
+        for (cn.xyf.flowcount.inherit.Teacher t : staff) {
             System.out.println(t.toString());
         }
     }
@@ -125,7 +125,7 @@ public class Main {
 //        mt1.start();
 //        mt2.start();
 
-        cn.xinyongfei.flowcount.MySecondThread mst1 = new cn.xinyongfei.flowcount.MySecondThread("mst1");
+        cn.xyf.flowcount.MySecondThread mst1 = new cn.xyf.flowcount.MySecondThread("mst1");
         Thread t1 = new Thread(mst1, "窗口1"); // 静态代理
         Thread t2 = new Thread(mst1, "窗口2");
         Thread t3 = new Thread(mst1, "窗口3");
