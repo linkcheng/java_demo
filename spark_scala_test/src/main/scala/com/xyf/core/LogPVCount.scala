@@ -1,4 +1,4 @@
-package com.xinyongfei.core
+package com.xyf.core
 
 import java.sql.DriverManager
 

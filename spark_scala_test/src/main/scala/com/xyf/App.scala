@@ -1,4 +1,4 @@
-package com.xinyongfei
+package com.xyf
 
 import javax.inject.{Inject, Provider, Singleton}
 /**

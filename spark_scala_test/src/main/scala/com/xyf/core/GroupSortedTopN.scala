@@ -1,4 +1,4 @@
-package com.xinyongfei.core
+package com.xyf.core
 
 import org.apache.spark.rdd.{RDD, ShuffledRDD}
 import org.apache.spark.{HashPartitioner, Partitioner, SparkConf, SparkContext}
