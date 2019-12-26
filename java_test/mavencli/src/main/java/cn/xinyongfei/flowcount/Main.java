@@ -2,7 +2,10 @@ package cn.xinyongfei.flowcount;
 
 import cn.xinyongfei.flowcount.inherit.*;
 import cn.xinyongfei.flowcount.vote.Voter;
+import sun.jvm.hotspot.runtime.Bytes;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 
@@ -144,6 +147,15 @@ public class Main {
 //        test3();
 //        test4();
 //        test5();
-        test6();
+//        test6();
+        String charset = "utf-8";
+        String text = "文件内容";
+        try {
+            byte[] bt = text.getBytes(charset);
+            System.out.println(bt[0]);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
     }
 }

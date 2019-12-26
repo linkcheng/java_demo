@@ -1,0 +1,210 @@
+{
+  "connect.name": "common.common.user_menu.Envelope",
+  "fields": [
+    {
+      "default": null,
+      "name": "before",
+      "type": [
+        "null",
+        {
+          "connect.name": "common.common.user_menu.Value",
+          "fields": [
+            {
+              "name": "id",
+              "type": "long"
+            },
+            {
+              "default": "",
+              "name": "name",
+              "type": {
+                "connect.default": "",
+                "type": "string"
+              }
+            },
+            {
+              "default": "",
+              "name": "icon_code",
+              "type": {
+                "connect.default": "",
+                "type": "string"
+              }
+            },
+            {
+              "default": 0,
+              "name": "parent_id",
+              "type": {
+                "connect.default": 0,
+                "type": "long"
+              }
+            },
+            {
+              "default": 0,
+              "name": "order",
+              "type": {
+                "connect.default": 0,
+                "type": "int"
+              }
+            },
+            {
+              "default": "#",
+              "name": "menu_url",
+              "type": {
+                "connect.default": "#",
+                "type": "string"
+              }
+            },
+            {
+              "default": 0,
+              "name": "is_deleted",
+              "type": {
+                "connect.default": 0,
+                "connect.type": "int16",
+                "type": "int"
+              }
+            },
+            {
+              "default": "1970-01-01T00:00:00Z",
+              "name": "created_time",
+              "type": {
+                "connect.default": "1970-01-01T00:00:00Z",
+                "connect.name": "io.debezium.time.ZonedTimestamp",
+                "connect.version": 1,
+                "type": "string"
+              }
+            },
+            {
+              "default": "1970-01-01T00:00:00Z",
+              "name": "updated_time",
+              "type": {
+                "connect.default": "1970-01-01T00:00:00Z",
+                "connect.name": "io.debezium.time.ZonedTimestamp",
+                "connect.version": 1,
+                "type": "string"
+              }
+            }
+          ],
+          "name": "Value",
+          "type": "record"
+        }
+      ]
+    },
+    {
+      "default": null,
+      "name": "after",
+      "type": [
+        "null",
+        "Value"
+      ]
+    },
+    {
+      "name": "source",
+      "type": {
+        "connect.name": "io.debezium.connector.mysql.Source",
+        "fields": [
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "connector",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "ts_ms",
+            "type": "long"
+          },
+          {
+            "default": "false",
+            "name": "snapshot",
+            "type": [
+              {
+                "connect.default": "false",
+                "connect.name": "io.debezium.data.Enum",
+                "connect.parameters": {
+                  "allowed": "true,last,false"
+                },
+                "connect.version": 1,
+                "type": "string"
+              },
+              "null"
+            ]
+          },
+          {
+            "name": "db",
+            "type": "string"
+          },
+          {
+            "default": null,
+            "name": "table",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          {
+            "name": "server_id",
+            "type": "long"
+          },
+          {
+            "default": null,
+            "name": "gtid",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          {
+            "name": "file",
+            "type": "string"
+          },
+          {
+            "name": "pos",
+            "type": "long"
+          },
+          {
+            "name": "row",
+            "type": "int"
+          },
+          {
+            "default": null,
+            "name": "thread",
+            "type": [
+              "null",
+              "long"
+            ]
+          },
+          {
+            "default": null,
+            "name": "query",
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        ],
+        "name": "Source",
+        "namespace": "io.debezium.connector.mysql",
+        "type": "record"
+      }
+    },
+    {
+      "name": "op",
+      "type": "string"
+    },
+    {
+      "default": null,
+      "name": "ts_ms",
+      "type": [
+        "null",
+        "long"
+      ]
+    }
+  ],
+  "name": "Envelope",
+  "namespace": "common.common.user_menu",
+  "type": "record"
+}
