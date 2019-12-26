@@ -1,4 +1,4 @@
-package cn.xinyongfei.flowcount
+package cn.xyf.flowcount
 
 import org.junit._
 import Assert._

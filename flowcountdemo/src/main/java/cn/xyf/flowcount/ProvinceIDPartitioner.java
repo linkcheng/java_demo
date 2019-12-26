@@ -1,4 +1,4 @@
-package cn.xinyongfei.flowcount;
+package cn.xyf.flowcount;
 
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Partitioner;

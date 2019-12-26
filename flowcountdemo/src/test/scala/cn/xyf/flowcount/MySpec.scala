@@ -1,4 +1,4 @@
-package cn.xinyongfei.flowcount
+package cn.xyf.flowcount
 
 import org.specs._
 import org.specs.runner.{ConsoleRunner, JUnit4}
