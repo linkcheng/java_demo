@@ -6,11 +6,22 @@
 
     <groupId>cn.xyf.flowcount</groupId>
     <artifactId>kafka-proj</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.6-SNAPSHOT</version>
 
     <properties>
+        <commons.lang3.version>3.9</commons.lang3.version>
+        <log4j.version>1.2.17</log4j.version>
+        <slf4j.version>1.7.30</slf4j.version>
+        <junit.version>4.12</junit.version>
+        <lombok.version>1.18.10</lombok.version>
         <kafka.scala.version>2.12</kafka.scala.version>
         <kafka.version>2.3.0</kafka.version>
+        <io.confluent.version>5.3.1</io.confluent.version>
+        <avro.version>1.8.2</avro.version>
+
+        <compiler.plugin.version>3.8.1</compiler.plugin.version>
+        <shade.plugin.version>2.3</shade.plugin.version>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -68,11 +79,19 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>slf4j-jdk14</artifactId>-->
-            <!--<version>1.7.25</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.kafka</groupId>
@@ -183,6 +202,8 @@
                                     <!--<mainClass>cn.xyf.flowcount.kafka.consumer.KafkaAvroConsumer</mainClass>-->
                                     <mainClass>cn.xyf.flowcount.kafka.streams.ConfluentStreams</mainClass>
                                     <!--<mainClass>cn.xyf.flowcount.kafka.streams.OSCheckStreaming</mainClass>-->
+                                    <!--<mainClass>cn.xyf.flowcount.kafka.consumer.KafkaWindowConsumer</mainClass>-->
+
                                 </transformer>
                             </transformers>
                         </configuration>

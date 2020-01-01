@@ -1,0 +1,19 @@
+{
+    "type": "record",
+    "name": "MenuCount",
+    "namespace": "cn.xyf.flowcount.kafka",
+    "fields": [
+        {
+            "name": "start",
+            "type": "long"
+        },
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "count",
+            "type": "long"
+        }
+    ]
+}

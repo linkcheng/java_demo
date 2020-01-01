@@ -2,12 +2,9 @@ package cn.xyf.flowcount.kafka.consumer;
 
 import common.common.user_menu.Envelope;
 import common.common.user_menu.Key;
-import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
-import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.generic.GenericRecord;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -16,34 +13,19 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
-;
 
 /**
  * ConfluentConsumer.java
  * 使用Confluent实现的Schema Registry服务来消费Avro序列化后的对象
  */
 @Slf4j
-public class KafkaAvroConsumer {
+public class KafkaAvroConsumer extends AbstractConsumer{
     private static String GROUP_ID = "avro_demo";
-    private static String BOOTSTRAP_SERVERS = "192.168.0.44:9092";
-    private static String SCHEMA_REGISTRY_URL = "http://192.168.0.44:8081";
     private static String topic = "common.common.user_menu";
 
-    public static Properties getProps() {
-        Properties props = new Properties();
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, GROUP_ID);
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, KafkaAvroDeserializer.class.getName());
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaAvroDeserializer.class.getName());
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); // earliest, none
-        props.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, SCHEMA_REGISTRY_URL);
-        return props;
-    }
 
-    public static void genericConsume() {
-        Properties props = getProps();
-
-        KafkaConsumer<GenericRecord, GenericRecord> consumer = new KafkaConsumer<>(props);
+    public void genericConsume() {
+        KafkaConsumer<GenericRecord, GenericRecord> consumer = new KafkaConsumer<>(getAvroProps(GROUP_ID));
         consumer.subscribe(Collections.singletonList(topic));
 
         try {
@@ -72,8 +54,8 @@ public class KafkaAvroConsumer {
 
     }
 
-    public static void specificConsume() {
-        Properties props = getProps();
+    public void specificConsume() {
+        Properties props = getAvroProps(GROUP_ID);
         props.put(KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG, "true");
 
         KafkaConsumer<Key, Envelope> consumer = new KafkaConsumer<>(props);
@@ -104,6 +86,6 @@ public class KafkaAvroConsumer {
     }
 
     public static void main(String[] args) {
-        specificConsume();
+        new KafkaAvroConsumer().specificConsume();
     }
 }
