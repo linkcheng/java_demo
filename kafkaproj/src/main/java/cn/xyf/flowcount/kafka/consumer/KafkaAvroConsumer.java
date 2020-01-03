@@ -20,7 +20,7 @@ import java.util.Properties;
  */
 @Slf4j
 public class KafkaAvroConsumer extends AbstractConsumer{
-    private static String GROUP_ID = "avro_demo";
+    private static String GROUP_ID = "avro_demo123";
     private static String topic = "common.common.user_menu";
 
 
@@ -33,17 +33,26 @@ public class KafkaAvroConsumer extends AbstractConsumer{
                 ConsumerRecords<GenericRecord, GenericRecord> records = consumer.poll(Duration.ofSeconds(2L));
                 for (ConsumerRecord<GenericRecord, GenericRecord> record : records) {
                     GenericRecord item = record.value();
+                    GenericRecord after = (GenericRecord)item.get("after");
+
                     log.info("value = [before=" + item.get("before")
-                            + ", after=" + item.get("after")
+//                            + ", after=" + item.get("after")
                             + ", source=" + item.get("source")
                             + ", op=" + item.get("op")
                             + ", ts_ms=" + item.get("ts_ms")
                             + "], schema = "+ item.getSchema()
                             + ", class = "+ item.getClass().getName()
-                            + ", before-class = "+ item.get("before").getClass().getName()
-                            + ", after-class = "+ item.get("after").getClass().getName()
+//                            + ", before-class = "+ item.get("before").getClass().getName()
+                            + ", after-class = "+ after.getClass().getName()
+                            + ", after = "+ after
+                            + ", created_time = "+ after.get("created_time")
+                            + ", updated_time = "+ after.get("updated_time")
+                            + ", created_time-class = "+ after.get("created_time").getClass().getName()
+                            + ", updated_time-class = "+ after.get("updated_time").getClass().getName()
                             + ", key = "+ record.key()
                             + ", partition = " + record.partition()
+                            + ", timestamp = " + record.timestamp()
+                            + ", timestampType = " + record.timestampType()
                             + ", offset = " + record.offset()
                     );
                 }
@@ -86,6 +95,6 @@ public class KafkaAvroConsumer extends AbstractConsumer{
     }
 
     public static void main(String[] args) {
-        new KafkaAvroConsumer().specificConsume();
+        new KafkaAvroConsumer().genericConsume();
     }
 }

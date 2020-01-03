@@ -90,24 +90,19 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
-            <scope>test</scope>
         </dependency>
 
+        <!-- kafka -->
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
             <version>${kafka.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-streams</artifactId>
             <version>${kafka.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.confluent</groupId>
-            <artifactId>kafka-streams-avro-serde</artifactId>
-            <version>5.3.1</version>
         </dependency>
 
         <dependency>
@@ -116,34 +111,36 @@
             <version>${kafka.version}</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.apache.kafka</groupId>-->
-            <!--<artifactId>kafka-tools</artifactId>-->
-            <!--<version>1.1.1</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-streams-avro-serde</artifactId>
+            <version>${io.confluent.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
             <version>1.8.2</version>
         </dependency>
+
         <dependency>
             <!--http://packages.confluent.io/maven/io/confluent/-->
             <groupId>io.confluent</groupId>
             <artifactId>kafka-avro-serializer</artifactId>
-            <version>5.3.1</version>
+            <version>${io.confluent.version}</version>
         </dependency>
+
         <dependency>
             <!--http://packages.confluent.io/maven/io/confluent/-->
             <groupId>io.confluent</groupId>
             <artifactId>kafka-connect-avro-converter</artifactId>
-            <version>5.3.1</version>
+            <version>${io.confluent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-tools</artifactId>
-            <version>5.3.1-ccs</version>
+            <version>${io.confluent.version}-ccs</version>
         </dependency>
 
     </dependencies>
@@ -199,8 +196,8 @@
                                     <!-- 这个是你的程序入口文件 -->
                                     <!--<mainClass>cn.xyf.flowcount.kafka.consumer.ConfluentConsumer</mainClass>-->
                                     <!--<mainClass>cn.xyf.flowcount.kafka.consumer.KafkaConsumeRunner</mainClass>-->
-                                    <!--<mainClass>cn.xyf.flowcount.kafka.consumer.KafkaAvroConsumer</mainClass>-->
-                                    <mainClass>cn.xyf.flowcount.kafka.streams.ConfluentStreams</mainClass>
+                                    <mainClass>cn.xyf.flowcount.kafka.consumer.KafkaAvroConsumer</mainClass>
+                                    <!--<mainClass>cn.xyf.flowcount.kafka.streams.ConfluentStreams</mainClass>-->
                                     <!--<mainClass>cn.xyf.flowcount.kafka.streams.OSCheckStreaming</mainClass>-->
                                     <!--<mainClass>cn.xyf.flowcount.kafka.consumer.KafkaWindowConsumer</mainClass>-->
 
