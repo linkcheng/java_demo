@@ -3,6 +3,13 @@ import org.apache.avro.util.Utf8;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 public class GsonTest {
@@ -31,6 +38,21 @@ public class GsonTest {
         for(String str: res) {
             logger.info(str);
         }
+    }
+
+    @Test
+    public void testDatetime() {
+        String string = "2020-01-07T11:50:18Z";
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try {
+            Date d = df.parse(string);
+            logger.info(d.toString());
+            logger.info(d.toInstant().toEpochMilli());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 }
 

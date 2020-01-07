@@ -1,5 +1,6 @@
 package cn.xyf.flowcount.kafka.streams;
 
+import cn.xyf.flowcount.kafka.CountTimestampExtractor;
 import cn.xyf.flowcount.kafka.MenuCount;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.streams.serdes.avro.GenericAvroSerde;
@@ -140,7 +141,8 @@ public class ConfluentStreams extends AbstractStreams {
         props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, GenericAvroSerde.class.getName());
         props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, GenericAvroSerde.class.getName());
         props.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryUrl);
-
+        // 时间抽取
+//        props.put(StreamsConfig.DEFAULT_TIMESTAMP_EXTRACTOR_CLASS_CONFIG, CountTimestampExtractor.class);
         return props;
     }
 
