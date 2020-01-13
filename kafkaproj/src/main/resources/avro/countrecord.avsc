@@ -1,0 +1,19 @@
+{
+    "type": "record",
+    "name": "CountRecord",
+    "namespace": "cn.xinyongfei.bi.streams",
+    "fields": [
+        {
+            "name": "op",
+            "type": "string"
+        },
+        {
+            "name": "start",
+            "type": "long"
+        },
+        {
+            "name": "count",
+            "type": "long"
+        }
+    ]
+}

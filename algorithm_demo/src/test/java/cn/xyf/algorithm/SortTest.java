@@ -32,4 +32,20 @@ public class SortTest {
         sort.selectionSort(arr);
         log.info(Arrays.toString(arr));
     }
+
+    @Test
+    public void testInsertSort() {
+        int[] arr = array.clone();
+        log.info(Arrays.toString(arr));
+        sort.insertSort(arr);
+        log.info(Arrays.toString(arr));
+    }
+
+    @Test
+    public void testMergeSort() {
+        int[] arr = array.clone();
+        log.info(Arrays.toString(arr));
+        sort.mergeSort(arr);
+        log.info(Arrays.toString(arr));
+    }
 }

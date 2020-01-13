@@ -197,8 +197,8 @@
                                     <!-- 这个是你的程序入口文件 -->
                                     <!--<mainClass>cn.xyf.flowcount.kafka.consumer.ConfluentConsumer</mainClass>-->
                                     <!--<mainClass>cn.xyf.flowcount.kafka.consumer.KafkaConsumeRunner</mainClass>-->
-                                    <mainClass>cn.xyf.flowcount.kafka.consumer.KafkaAvroConsumer</mainClass>
-                                    <!--<mainClass>cn.xyf.flowcount.kafka.streams.ConfluentStreams</mainClass>-->
+                                    <!--<mainClass>cn.xyf.flowcount.kafka.consumer.KafkaAvroConsumer</mainClass>-->
+                                    <mainClass>cn.xyf.flowcount.kafka.streams.ConfluentStreams</mainClass>
                                     <!--<mainClass>cn.xyf.flowcount.kafka.streams.OSCheckStreaming</mainClass>-->
                                     <!--<mainClass>cn.xyf.flowcount.kafka.consumer.KafkaWindowConsumer</mainClass>-->
 

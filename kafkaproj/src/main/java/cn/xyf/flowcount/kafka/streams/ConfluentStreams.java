@@ -1,5 +1,6 @@
 package cn.xyf.flowcount.kafka.streams;
 
+import cn.xinyongfei.bi.streams.CountRecord;
 import cn.xyf.flowcount.kafka.CountTimestampExtractor;
 import cn.xyf.flowcount.kafka.MenuCount;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
@@ -60,6 +61,38 @@ public class ConfluentStreams extends AbstractStreams {
                 .count()
                 .toStream()
                 ;
+    }
+
+    /**
+     * 构建 DAG 逻辑过程
+     * kafka.version=2.3
+     * @param builder
+     */
+    public void process(final StreamsBuilder builder) {
+        Serde<GenericRecord> keyGenericAvroSerde = makeSerde(true);
+        Serde<GenericRecord> valueGenericAvroSerde = makeSerde(false);
+        Duration window = Duration.ofSeconds(30);
+
+        KStream<GenericRecord, GenericRecord> stream = builder.stream(inputTopic);
+
+        KStream<Windowed<String>, Long> newStream = stream
+                .map((k, v) -> new KeyValue<>(v.get("op").toString(), (GenericRecord)v.get("after")))
+                .groupByKey(Grouped.with(Serdes.String(), valueGenericAvroSerde))
+                .windowedBy(TimeWindows.of(window).advanceBy(window).grace(Duration.ofSeconds(10L)))
+                .count(Materialized.with(Serdes.String(), Serdes.Long()))
+                .suppress(Suppressed.untilWindowCloses(Suppressed.BufferConfig.unbounded()))
+                .toStream()
+        ;
+
+        newStream.mapValues(
+                (k ,v) -> {
+                    GenericRecord record = new GenericData.Record(CountRecord.getClassSchema());
+                    record.put("op",  k.key());
+                    record.put("start", k.window().start());
+                    record.put("count",  v);
+                    return record;
+                })
+                .to(outputTopic, Produced.with(WindowedSerdes.timeWindowedSerdeFrom(String.class), keyGenericAvroSerde));
     }
 
     /**

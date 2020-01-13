@@ -1,11 +1,17 @@
 package cn.xyf.flowcount.kafka.streams;
 
+import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
+import io.confluent.kafka.streams.serdes.avro.GenericAvroSerde;
 import lombok.Data;
 import lombok.Getter;
+import org.apache.avro.generic.GenericRecord;
+import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsConfig;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 
