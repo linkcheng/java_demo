@@ -53,6 +53,23 @@ public class SortTest {
     }
 
     @Test
+    public void testPartition() {
+        int[] arr = {3,4,5,6,0,4,4};
+        log.info(Arrays.toString(arr));
+        int[] p = sort.partition(arr, 0, arr.length-1);
+        log.info(Arrays.toString(arr));
+        log.info(Arrays.toString(p));
+    }
+
+    @Test
+    public void testQuickSort() {
+        int[] arr = array.clone();
+        log.info(Arrays.toString(arr));
+        sort.quickSort(arr, 0, arr.length-1);
+        log.info(Arrays.toString(arr));
+    }
+
+    @Test
     public void testSumByMergeSort() {
         int[] arr = {4,1,3,5,0,6};
         log.info(Arrays.toString(arr));
@@ -98,6 +115,11 @@ public class SortTest {
 
     }
 
+
+    @Test
+    public void testRandom() {
+        log.info((int)(Math.random()*(8-5+1))+"");
+    }
 
     @Test
     public void testList() {

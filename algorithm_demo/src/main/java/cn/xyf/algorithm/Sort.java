@@ -1,7 +1,8 @@
 package cn.xyf.algorithm;
 
-
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /*升序*/
 public class Sort {
@@ -204,10 +205,80 @@ public class Sort {
         return sum;
     }
 
+    /**
+     * 把一个乱序数据，分成小于，等于，大于数组最后一个数的三部分，每一部分可以乱序
+     * @param arr 需要分组的数组
+     * @param left 左边界
+     * @param right 右边界
+     * @return 相等区域的左右边界
+     */
+    public int[] partition(int[] arr, int left, int right) {
+        // 小于区域的右边界
+        int less = left - 1;
+        // 大于区域的左边界以及分界数，分界数为数组当前区域的最后一个数字
+        int more = right;
+
+        while(left < more) {
+            if(arr[left]<arr[right]) {  // 当前数<分界数
+                // 交换，并且小于区域扩展，并使用下一个数
+                swap(arr, ++less, left++);
+            } else if (arr[left]>arr[right]) {  // 当前数>分界数
+                // 交换，并且大于区域扩展，交换后使用当前位置的数
+                swap(arr, --more, left);
+            } else {  // // 当前数==分界数
+                // 下一个数
+                left++;
+            }
+        }
+
+        swap(arr, more, right);
+
+        return new int[] {less+1, more};
+    }
+
+    public void quickSort(int[] arr, int left, int right) {
+        if(left < right) {
+            // 随机获取划分值
+            swap(arr, left+(int)(Math.random()*(right-left+1)), right);
+
+            int[] p = partition(arr, left, right);
+            quickSort(arr, left, p[0]-1);
+            quickSort(arr, p[1]+1, right);
+        }
+    }
+
+
     /*
      * 贪心策略：脑补一个标准，按照这个标准确定一个答案
      * 比如：时间轴上有如多课程，按照课程最早结束，可以安排出一天最多的课程数量
      */
 
+    public static void main(String[] args) {
+        A a = new B();
+        a.hello();
+
+        Map<String, Integer> map = new HashMap<>();
+        map.put("apple", 123);
+        map.put("pear", 456);
+        map.put("banana", 789);
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+            System.out.println(key + " = " + value);
+        }
+    }
 }
 
+
+class A {
+    public void hello() {
+        System.out.println("hello A");
+    }
+}
+
+class B extends A {
+    @Override
+    public void hello() {
+        System.out.println("hello B");
+    }
+}
