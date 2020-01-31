@@ -1,7 +1,7 @@
 package cn.xyf.algorithm;
 
-import javax.imageio.metadata.IIOMetadataNode;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -352,8 +352,8 @@ public class Sort {
      */
 
     public static void main(String[] args) {
-        A a = new B();
-        a.hello();
+//        A a = new B(1);
+//        a.hello();
 
         Map<String, Integer> map = new HashMap<>();
         map.put("apple", 123);
@@ -364,19 +364,50 @@ public class Sort {
             Integer value = entry.getValue();
             System.out.println(key + " = " + value);
         }
+
+        A[] aList = new A[] {new A(1), new A(3), new A(2)};
+        Arrays.sort(aList, (o1, o2) -> o1.id - o2.id);
+        for(A i: aList) {
+            System.out.println(i.id);
+        }
+
+        B[] bList = new B[] {new B(1), new B(3), new B(2)};
+        Arrays.sort(bList, Comparator.comparingInt(o -> o.id));
+        for(B i: bList) {
+            System.out.println(i.id);
+        }
     }
 }
 
 
 class A {
+    public int id;
+    public A(int id) {
+        this.id = id;
+    }
     public void hello() {
         System.out.println("hello A");
     }
 }
 
 class B extends A {
+    public B(int id) {
+        super(id);
+    }
     @Override
     public void hello() {
         System.out.println("hello B");
+    }
+}
+
+
+/**
+ * 比较器
+ */
+class IdAscendingComparator implements Comparator<A> {
+
+    @Override
+    public int compare(A o1, A o2) {
+        return o1.id - o2.id;
     }
 }

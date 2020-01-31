@@ -72,6 +72,7 @@ public class SortTest {
     @Test
     public void testHeapSort() {
         int[] arr = array.clone();
+        Arrays.sort(arr);
         log.info(Arrays.toString(arr));
         sort.heapSort(arr);
         log.info(Arrays.toString(arr));
