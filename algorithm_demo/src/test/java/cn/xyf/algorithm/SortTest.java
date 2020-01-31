@@ -65,7 +65,29 @@ public class SortTest {
     public void testQuickSort() {
         int[] arr = array.clone();
         log.info(Arrays.toString(arr));
-        sort.quickSort(arr, 0, arr.length-1);
+        sort.quickSort(arr);
+        log.info(Arrays.toString(arr));
+    }
+
+    @Test
+    public void testHeapSort() {
+        int[] arr = array.clone();
+        log.info(Arrays.toString(arr));
+        sort.heapSort(arr);
+        log.info(Arrays.toString(arr));
+    }
+
+    @Test
+    public void testHeapInsert() {
+        int[] arr = new int[] {1,2,3,4,5};
+        log.info(Arrays.toString(arr));
+        // 堆大小
+        int heapSize = arr.length;
+        // 构建大根堆
+        for(int i=0; i<heapSize; i++) {
+            sort.heapInsert(arr, i);
+            log.info(Arrays.toString(arr));
+        }
         log.info(Arrays.toString(arr));
     }
 
@@ -119,6 +141,7 @@ public class SortTest {
     @Test
     public void testRandom() {
         log.info((int)(Math.random()*(8-5+1))+"");
+        log.info((-1>>1)+"");
     }
 
     @Test

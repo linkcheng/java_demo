@@ -1,5 +1,6 @@
 package cn.xyf.algorithm;
 
+import javax.imageio.metadata.IIOMetadataNode;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,6 +64,9 @@ public class Sort {
     /**
      * 归并排序
      * @param arr 要排序的数组
+     * 时间复杂度：O(n*log n)
+     * 空间复杂度：O(n)
+     * 稳定性：可以实现成稳定的
      */
     public void mergeSort(int[] arr) {
         if(arr==null || arr.length<2) {
@@ -206,6 +210,36 @@ public class Sort {
     }
 
     /**
+     * 快排
+     * @param arr 数组
+     * 时间复杂度：O(n*log n)
+     * 空间复杂度：O(log n)
+     * 稳定性：不能是实现成稳定的
+     */
+    public void quickSort(int[] arr) {
+        if(arr==null || arr.length<2) {
+            return;
+        }
+        qsQuickSort(arr, 0, arr.length-1);
+    }
+
+    /**
+     * @param arr 数组
+     * @param left 左边界
+     * @param right 右边界
+     */
+    public void qsQuickSort(int[] arr, int left, int right) {
+        if(left < right) {
+            // 随机获取划分值
+            swap(arr, left+(int)(Math.random()*(right-left+1)), right);
+
+            int[] p = partition(arr, left, right);
+            qsQuickSort(arr, left, p[0]-1);
+            qsQuickSort(arr, p[1]+1, right);
+        }
+    }
+
+    /**
      * 把一个乱序数据，分成小于，等于，大于数组最后一个数的三部分，每一部分可以乱序
      * @param arr 需要分组的数组
      * @param left 左边界
@@ -236,17 +270,81 @@ public class Sort {
         return new int[] {less+1, more};
     }
 
-    public void quickSort(int[] arr, int left, int right) {
-        if(left < right) {
-            // 随机获取划分值
-            swap(arr, left+(int)(Math.random()*(right-left+1)), right);
 
-            int[] p = partition(arr, left, right);
-            quickSort(arr, left, p[0]-1);
-            quickSort(arr, p[1]+1, right);
+    /**
+     * 堆排序：大根堆
+     * @param arr 数组
+     * 时间复杂度：O(n * log n)，常数项比较大
+     * 稳定性：不稳定
+     */
+    public void heapSort(int[] arr) {
+        if(arr==null || arr.length<2) {
+            return;
+        }
+
+        // 堆大小
+        int heapSize = arr.length;
+        // 构建大根堆
+        for(int i=0; i<heapSize; i++) {
+            heapInsert(arr, i);
+        }
+
+        // 通过控制数组边界，也就是size的大小，实现调整堆容量大小
+        // 第一个数跟最后一个数交换，也就是移动出最大的（根节点）
+        // 重新调整新的大小的堆，使之再次成为大根堆（heapify）
+        // 虚幻操作，最终是堆的大小减成 0，结束
+        swap(arr, 0, --heapSize);
+
+        while(heapSize>0) {
+            heapify(arr, 0, heapSize);
+            swap(arr, 0, --heapSize);
         }
     }
 
+    /**
+     * 往堆中插入数据，构建大根堆，但是无序
+     * @param arr 数组
+     * @param index 位置
+     * 时间复杂度：O(n)
+     */
+    public void heapInsert(int[] arr, int index) {
+        // 通过下标位置的计算实现父子节点对应
+        int parent = (index-1)>>1;
+
+        // 如果当前节点>父节点，一直往上交换
+        while(parent>=0 && arr[index] > arr[parent]) {
+            swap(arr, parent, index);
+            index = parent;
+            parent = (index-1)>>1;
+        }
+    }
+
+    /**
+     * 调整堆，使之保持大根堆结构
+     * @param arr 数组
+     * @param parent 开始的位置
+     * @param size 堆大小
+     */
+    public void heapify(int[] arr, int parent, int size) {
+        int leftChild = parent * 2 + 1;
+
+        while(leftChild<size) {
+            int rightChild = leftChild + 1;
+            // 根据左右孩子的值的大小，取得最大值的下标
+            int largest = rightChild<size && arr[rightChild]>arr[leftChild] ? rightChild : leftChild;
+            // 再跟父节点判断谁大
+            largest = arr[largest] > arr[parent] ? largest : parent;
+            // 父节点就是最大的，不需要调整
+            if(largest == parent) {
+                break;
+            }
+
+            // 父节点跟较大节点交换
+            swap(arr, largest, parent);
+            parent = largest;
+            leftChild = parent * 2 + 1;
+        }
+    }
 
     /*
      * 贪心策略：脑补一个标准，按照这个标准确定一个答案
