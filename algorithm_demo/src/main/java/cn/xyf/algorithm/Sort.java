@@ -365,6 +365,7 @@ public class Sort {
             System.out.println(key + " = " + value);
         }
 
+        // 优化的比较器
         A[] aList = new A[] {new A(1), new A(3), new A(2)};
         Arrays.sort(aList, (o1, o2) -> o1.id - o2.id);
         for(A i: aList) {
