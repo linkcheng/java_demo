@@ -6,7 +6,11 @@
 
     <groupId>cn.java.test</groupId>
     <artifactId>java_test</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>spring-ioc</module>
+    </modules>
 
 
 </project>
