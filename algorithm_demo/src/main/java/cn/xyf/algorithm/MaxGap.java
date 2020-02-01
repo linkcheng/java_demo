@@ -1,5 +1,8 @@
 package cn.xyf.algorithm;
 
+/**
+ * 无序数组中，有序后相邻数据差的最大值
+ */
 public class MaxGap {
 
     public static int getMaxGap(int[] arr) {

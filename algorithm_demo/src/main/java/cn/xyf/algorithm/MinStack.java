@@ -1,5 +1,8 @@
 package cn.xyf.algorithm;
 
+/**
+ * 最小栈
+ */
 public class MinStack {
     private Stack dataStack;
     private Stack minStack;

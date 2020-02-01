@@ -1,5 +1,8 @@
 package cn.xyf.algorithm;
 
+/**
+ * 队列
+ */
 public class Queue {
     private Integer[] arr;
     // 表示已经使用队列的大小

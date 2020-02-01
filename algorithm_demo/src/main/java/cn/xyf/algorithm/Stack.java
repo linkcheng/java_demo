@@ -1,5 +1,8 @@
 package cn.xyf.algorithm;
 
+/**
+ * 栈
+ */
 public class Stack {
     private Integer[] arr;
     // 可以写入数据的位置
