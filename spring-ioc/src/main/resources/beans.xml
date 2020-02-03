@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--https://docs.spring.io/spring/docs/5.2.3.RELEASE/spring-framework-reference/core.html#spring-core-->
+    <bean id="hello" class="cn.xyf.Hello">
+        <property name="name" value="hello"/>
+    </bean>
+
+    <bean id="mysqlImpl" class="cn.xyf.UserMySQLDaoImpl"/>
+    <bean id="oracleImpl" class="cn.xyf.UserOracleDaoImpl"/>
+
+    <bean id="serviceImpl" class="cn.xyf.UserServiceImpl">
+        <!--注意: 这里的name并不是属性 , 而是set方法后面的那部分 , 首字母小写-->
+        <!--引用另外一个bean , 不是用value 而是用 ref-->
+        <!--ref 引用 spring 容器中创建好的对象-->
+        <property name="userDao" ref="oracleImpl"/>
+    </bean>
+
+</beans>
