@@ -1,5 +1,7 @@
 package cn.xyf.algorithm;
 
+import java.util.PriorityQueue;
+
 /**
  * 不使用额外的数据结构，只用有限几个变量，且在时间复杂度为 O(N) 内完成带有随机指针的链表复制
  */
@@ -71,11 +73,12 @@ public class CopyList {
         Node tmp;
 
         // cur 与 newCur 分别指向要处理的节点
-        while (cur != null) {
+        while (cur != null && cur.next != null && newCur != null) {
             tmp = cur.next.next;
             cur.next = tmp;
-            cur = tmp;
-            newCur.next = tmp == null ? null : tmp.next;
+            newCur.next = tmp != null ? tmp.next : null;
+
+            cur = cur.next;
             newCur = newCur.next;
 
         }
@@ -138,6 +141,7 @@ public class CopyList {
 //        printRandLinkedList(cl.doubleList(head));
 //        printRandLinkedList(cl.setNewNodeRandPtr(head));
         printRandLinkedList(cl.copyList(head));
+//        printRandLinkedList(cl.splitList(head));
 
 
         System.out.println("=========================");
