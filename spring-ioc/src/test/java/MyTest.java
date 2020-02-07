@@ -1,9 +1,9 @@
-import cn.xyf.Hello;
-import cn.xyf.Node;
+import cn.xyf.*;
 import cn.xyf.dao.UserDaoMongoImpl;
 import cn.xyf.service.SuperuserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class MyTest {
@@ -36,4 +36,18 @@ public class MyTest {
         service.getUser();
     }
 
+
+    @Test
+    public void testHello2() {
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        Hello2 hello2 = context.getBean("hello2", Hello2.class);
+        System.out.println(hello2.toString());
+    }
+
+    @Test
+    public void testNode2() {
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        Node2 node2 = context.getBean("node2", Node2.class);
+        System.out.println(node2.toString());
+    }
 }
