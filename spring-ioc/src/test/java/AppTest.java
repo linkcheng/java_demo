@@ -1,4 +1,4 @@
-import cn.xyf.UserServiceImpl;
+import cn.xyf.service.UserServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

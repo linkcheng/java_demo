@@ -1,29 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd">
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="cn.xyf"/>
+    <!-- component-scan 会添加 annotation-config-->
+    <!--<context:annotation-config/>-->
+
+    <bean id="dog1" class="cn.xyf.service.Dog">
+        <property name="name" value="狗子"/>
+    </bean>
+
+    <bean id="dog2" class="cn.xyf.service.Dog">
+        <property name="name" value="二狗子"/>
+    </bean>
+
+    <bean id="cat1" class="cn.xyf.service.Cat">
+        <property name="name" value="帽子"/>
+    </bean>
+
+    <bean id="cat2" class="cn.xyf.service.Cat">
+        <property name="name" value="二帽子"/>
+    </bean>
+
+    <bean id="zhangsan" class="cn.xyf.service.Person">
+        <property name="name" value="zhangsan"/>
+    </bean>
 
     <!--https://docs.spring.io/spring/docs/5.2.3.RELEASE/spring-framework-reference/core.html#spring-core-->
     <bean id="hello" class="cn.xyf.Hello">
         <property name="name" value="hello"/>
     </bean>
 
-    <bean id="mysqlImpl" class="cn.xyf.UserMySQLDaoImpl"/>
-    <bean id="oracleImpl" class="cn.xyf.UserOracleDaoImpl"/>
+    <bean id="mysqlImpl" class="cn.xyf.dao.UserDaoMySQLImpl"/>
+    <bean id="oracleImpl" class="cn.xyf.dao.UserDaoOracleImpl"/>
 
-    <bean id="serviceImpl" class="cn.xyf.UserServiceImpl">
+    <bean id="serviceImpl" class="cn.xyf.service.UserServiceImpl">
         <!--注意: 这里的name并不是属性 , 而是set方法后面的那部分 , 首字母小写-->
         <!--引用另外一个bean , 不是用value 而是用 ref-->
         <!--ref 引用 spring 容器中创建好的对象-->
         <property name="userDao" ref="oracleImpl"/>
     </bean>
+    <!--<bean id="superuserServiceImpl" class="cn.xyf.service.SuperuserServiceImpl">-->
+        <!--<property name="userDao" ref="mongo"/>-->
+    <!--</bean>-->
 
-    <bean id="address" class="cn.xyf.Address">
+    <bean id="address" class="cn.xyf.service.Address">
         <property name="address" value="China"/>
     </bean>
 
-    <bean id="student1" class="cn.xyf.Student">
+    <bean id="student1" class="cn.xyf.service.Student">
         <!--普通值注入-->
         <property name="name" value="张三"/>
         <!--Bean 注入 ref-->

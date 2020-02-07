@@ -1,6 +1,6 @@
-package cn.xyf;
+package cn.xyf.dao;
 
-public class UserMySQLDaoImpl implements UserDao {
+public class UserDaoMySQLImpl implements UserDao {
     public void getUser() {
         System.out.println("Get user from MySQL");
     }

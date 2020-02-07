@@ -1,6 +1,6 @@
-package cn.xyf;
+package cn.xyf.dao;
 
-public class UserOracleDaoImpl implements UserDao {
+public class UserDaoOracleImpl implements UserDao {
     public void getUser() {
         System.out.println("Get user from Oracle");
     }

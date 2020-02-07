@@ -1,4 +1,4 @@
-package cn.xyf;
+package cn.xyf.service;
 
 public class Address {
 

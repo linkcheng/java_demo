@@ -1,4 +1,6 @@
-package cn.xyf;
+package cn.xyf.service;
+
+import cn.xyf.dao.UserDao;
 
 public class UserServiceImpl implements UserService{
 //    UserDao userDao = new UserDaoImpl();

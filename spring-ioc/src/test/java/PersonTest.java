@@ -1,12 +1,11 @@
-import cn.xyf.service.Student;
+import cn.xyf.service.Person;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-
-public class StudentTest {
+public class PersonTest {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-        Student student = (Student) context.getBean("student1");
-        System.out.println(student.toString());
+        Person person = context.getBean("zhangsan", Person.class);
+        System.out.println(person.toString());
     }
 }

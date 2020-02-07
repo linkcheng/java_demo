@@ -1,4 +1,4 @@
-package cn.xyf;
+package cn.xyf.dao;
 
 public class UserDaoImpl implements UserDao{
     public void getUser() {
