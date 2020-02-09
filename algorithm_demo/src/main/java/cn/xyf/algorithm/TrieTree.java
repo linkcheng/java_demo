@@ -1,8 +1,5 @@
 package cn.xyf.algorithm;
 
-
-import scala.collection.concurrent.TNode;
-
 /**
  * 前缀树
  * 节点不含包内容，或者节点只包含统计数据，节点包含为通往下一级节点所有边，边包含信息
