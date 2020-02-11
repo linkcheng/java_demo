@@ -1,7 +1,6 @@
 package cn.xyf.algorithm.graph;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 public class Graph {
     // 顶点的集合，key 为顶点编号，也就是 Vertex 的 value
@@ -28,6 +27,68 @@ public class Graph {
 
     public void setEdges(HashSet<Edge> edges) {
         this.edges = edges;
+    }
+
+    /**
+     * BFS 宽度优先遍历，广度优先遍历
+     */
+    public void bfs(Vertex head) {
+        if(head == null) {
+            return;
+        }
+        Queue<Vertex> queue = new LinkedList<>();
+        // 用于去重，保证一个节点只被处理一次
+        HashSet<Vertex> set = new HashSet<>();
+
+        queue.add(head);
+        set.add(head);
+
+        while(!queue.isEmpty()) {
+            Vertex cur = queue.poll();
+            System.out.println(cur.getValue());
+
+            for(Vertex next : cur.getNexts()) {
+                // 如果没有在集合中，就添加
+                if(!set.contains(next)) {
+                    queue.add(next);
+                    set.add(next);
+                }
+            }
+        }
+    }
+
+    /**
+     * DFS 深度优先遍历
+     */
+    public void dfs(Vertex head) {
+        if(head == null) {
+            return;
+        }
+
+        Stack<Vertex> stack = new Stack<>();
+        // 用于去重，保证一个节点只被处理一次
+        HashSet<Vertex> set = new HashSet<>();
+
+        stack.push(head);
+        set.add(head);
+        System.out.println(head.getValue());
+
+        while(!stack.isEmpty()) {
+            Vertex cur = stack.pop();
+
+            for(Vertex next : cur.getNexts()) {
+                // 一条胡同走到黑
+                // 后代中有一个没走过，就把当前顶点跟这一个后代顶点压入栈，
+                // 压入这个后代顶点就打印
+                if(!set.contains(next)) {
+                    stack.push(cur);
+                    stack.push(next);
+                    set.add(next);
+                    System.out.println(next.getValue());
+                    break;
+                }
+            }
+        }
     }
 
     public static class GraphBuilder {

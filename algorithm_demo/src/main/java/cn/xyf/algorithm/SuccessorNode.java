@@ -1,5 +1,8 @@
 package cn.xyf.algorithm;
 
+/**
+ * 中序遍历的方式，返回一棵树的任意节点的后续节点
+ */
 public class SuccessorNode {
     public static class Node {
         public int value;

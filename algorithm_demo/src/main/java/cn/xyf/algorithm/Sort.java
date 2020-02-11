@@ -184,11 +184,11 @@ public class Sort {
 
         // 从小到大依次从两个数组中选择数据合并
         while(p1<=mid && p2<=right) {
-            // 发现一个右边大于左边的数字，记录一次
-            if(arr[p1] < arr[p2]) {
-                sum += arr[p1]*(right-p2+1);
-            }
-//            sum +=  arr[p1] < arr[p2] ?  arr[p1]*(right-p2+1) : 0;
+//            if(arr[p1] < arr[p2]) {
+//                sum += arr[p1]*(right-p2+1);
+//            }
+            // 发现一个右边大于左边的数字，记录一次，发现多个记录多次
+            sum +=  arr[p1] < arr[p2] ?  arr[p1]*(right-p2+1) : 0;
             help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
         }
 
@@ -251,6 +251,7 @@ public class Sort {
         int less = left - 1;
         // 大于区域的左边界以及分界数，分界数为数组当前区域的最后一个数字
         int more = right;
+        // left 为 cur 指针，遍历 arr
 
         while(left < more) {
             if(arr[left]<arr[right]) {  // 当前数<分界数
@@ -292,9 +293,10 @@ public class Sort {
         // 通过控制数组边界，也就是size的大小，实现调整堆容量大小
         // 第一个数跟最后一个数交换，也就是移动出最大的（根节点）
         // 重新调整新的大小的堆，使之再次成为大根堆（heapify）
-        // 虚幻操作，最终是堆的大小减成 0，结束
+        // 互换操作，最终是堆的大小减成 0，结束
         swap(arr, 0, --heapSize);
 
+        // 互换操作，最终是堆的大小减成 0，结束
         while(heapSize>0) {
             heapify(arr, 0, heapSize);
             swap(arr, 0, --heapSize);

@@ -1,5 +1,9 @@
 package cn.xyf.service;
 
 public interface UserService {
-    public void getUser();
+    void getUser();
+    void add();
+    void delete();
+    void update();
+    void query();
 }

@@ -6,22 +6,23 @@ import java.util.ArrayList;
  * 图的顶点
  */
 public class Vertex {
+    // 顶点编号
     private int value;
     // 入度
     private int in;
     // 出度
     private int out;
-    // 从我出发，邻居的节点
-    private ArrayList<Vertex> nexts;
     // 从我出发，发散出的边
     private ArrayList<Edge> edges;
+    // 从我出发，邻居的节点
+    private ArrayList<Vertex> nexts;
 
     public Vertex(int value) {
         this.value = value;
         in = 0;
         out = 0;
-        nexts = new ArrayList<>();
         edges = new ArrayList<>();
+        nexts = new ArrayList<>();
     }
 
     public int getValue() {

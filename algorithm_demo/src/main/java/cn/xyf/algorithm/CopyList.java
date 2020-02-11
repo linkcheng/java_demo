@@ -1,7 +1,5 @@
 package cn.xyf.algorithm;
 
-import java.util.PriorityQueue;
-
 /**
  * 不使用额外的数据结构，只用有限几个变量，且在时间复杂度为 O(N) 内完成带有随机指针的链表复制
  */

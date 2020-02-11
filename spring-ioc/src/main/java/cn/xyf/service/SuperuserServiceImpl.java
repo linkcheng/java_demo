@@ -30,4 +30,20 @@ public class SuperuserServiceImpl implements UserService {
         System.out.print("# ");
         userDao.getUser();
     }
+
+    public void add() {
+
+    }
+
+    public void delete() {
+
+    }
+
+    public void update() {
+
+    }
+
+    public void query() {
+
+    }
 }
