@@ -1,7 +1,7 @@
 import cn.xyf.*;
 import cn.xyf.dao.UserDaoMongoImpl;
 import cn.xyf.service.SuperuserServiceImpl;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
