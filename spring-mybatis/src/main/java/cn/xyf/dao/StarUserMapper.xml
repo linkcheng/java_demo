@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper 文件的作用跟 StarUserDaoImpl 实现类一样-->
+<!--绑定对应的 Dao 接口或者 Mapper 接口-->
+<mapper namespace="cn.xyf.dao.StarUserDao">
+    <select id="selectUserList" resultType="cn.xyf.pojo.StarUser">
+        select * from mybatis.StarUser
+    </select>
+</mapper>
