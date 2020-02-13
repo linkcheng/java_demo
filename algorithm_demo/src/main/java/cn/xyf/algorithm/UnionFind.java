@@ -1,20 +1,23 @@
 package cn.xyf.algorithm;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * 并查集
  */
-public class UnionFind {
-    public static class Node {
-        public int data;
+public class UnionFind<T> {
+    // parentMap：key 为数据节点 node, value 为 node 的父节点
+    public HashMap<T, T> parentMap;
+    // sizeMap：key 为数据节点 node，value 为以 node 为代表节点的大小
+    public HashMap<T, Integer> sizeMap;
+
+    public UnionFind() {
+        parentMap = new HashMap<>();
+        sizeMap = new HashMap<>();
     }
 
-    public HashMap<Node, Node> parentMap;
-    public HashMap<Node, Integer> sizeMap;
-
-    public UnionFind(List<Node> nodes) {
+    public UnionFind(Collection<T> nodes) {
         parentMap = new HashMap<>();
         sizeMap = new HashMap<>();
         makeSets(nodes);
@@ -25,22 +28,21 @@ public class UnionFind {
      * parentMap：key 为数据节点 node, value 为 node 的父节点
      * sizeMap：key 为数据节点 node，value 为以 node 为代表节点的大小
      */
-    private void makeSets(List<Node> nodes) {
+    public void makeSets(Collection<T> nodes) {
         parentMap.clear();
         sizeMap.clear();
-        for(Node node : nodes) {
+        for(T node : nodes) {
             parentMap.put(node, node);
             sizeMap.put(node, 1);
         }
     }
 
-
     /**
      * 搜索 node 节点的代表节点 rep，并且把搜索路上的所有节点的代表节点都设置为 rep
      */
-    public Node findRep(Node node) {
-        Node parent = parentMap.get(node);
-        Node rep = parent;
+    public T findRep(T node) {
+        T parent = parentMap.get(node);
+        T rep = parent;
         if(parent != node) {
             rep = findRep(parent);
         }
@@ -51,14 +53,14 @@ public class UnionFind {
     /**
      * 并查集合并，返回合并后的代表节点
      */
-    public Node union(Node node1, Node node2) {
+    public T union(T node1, T node2) {
         if(node1 == null || node2 == null) {
             return null;
         }
 
-        Node rep1 = findRep(node1);
-        Node rep2 = findRep(node2);
-        Node rep = rep1;
+        T rep1 = findRep(node1);
+        T rep2 = findRep(node2);
+        T rep = rep1;
 
         // 如果不在同一个并查集，进行合并
         if(rep1 != rep2) {
@@ -77,5 +79,12 @@ public class UnionFind {
         }
 
         return rep;
+    }
+
+    /**
+     * 是否在同一个集合中
+     */
+    public boolean isSameSet(T a, T b) {
+        return findRep(a) == findRep(b);
     }
 }

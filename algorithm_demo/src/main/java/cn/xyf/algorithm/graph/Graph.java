@@ -1,5 +1,7 @@
 package cn.xyf.algorithm.graph;
 
+import cn.xyf.algorithm.UnionFind;
+
 import java.util.*;
 
 public class Graph {
@@ -89,6 +91,124 @@ public class Graph {
                 }
             }
         }
+    }
+
+    /**
+     * 图的拓扑排序，只针对有向无环图
+     */
+    public List<Vertex> topologicalSort(Graph graph) {
+        // 图的所有顶点以及对应的入度
+        HashMap<Vertex, Integer> inMap = new HashMap<>();
+        // 入度为零的队列
+        Queue<Vertex> zeroInQueue = new LinkedList<>();
+
+        // 遍历所有顶点，初始化 inMap，zeroInQueue
+        for (Vertex vertex : graph.vertexes.values()) {
+            inMap.put(vertex, vertex.getIn());
+
+            if(vertex.getIn() == 0) {
+                zeroInQueue.add(vertex);
+            }
+        }
+
+        List<Vertex> result = new ArrayList<>();
+        // 消费入度为零的顶点，让后续顶点也加入
+        while (!zeroInQueue.isEmpty()) {
+            Vertex cur = zeroInQueue.poll();
+            // 收集，作为返回集合
+            result.add(cur);
+
+            // 刷新入度非零的顶点，消除已经处理过的顶点对之后顶点入度的影响
+            for (Vertex next : cur.getNexts()) {
+                inMap.put(next, inMap.get(next)-1);
+                // 收集
+                if(inMap.get(next) == 0) {
+                    zeroInQueue.add(next);
+                }
+            }
+        }
+
+        return result;
+    }
+
+
+    /*
+
+    def topological_sort(graph_unsorted):
+        graph_sorted = []
+
+        while graph_unsorted:
+            acyclic = False
+            for node, edges in list(graph_unsorted.items()):
+                for edge in edges:
+                    if edge in graph_unsorted:
+                        break
+                else:
+                    acyclic = True
+                    del graph_unsorted[node]
+                    graph_sorted.append((node, edges))
+
+            if not acyclic:
+                raise RuntimeError("A cyclic dependency occurred")
+
+        return graph_sorted
+
+     */
+
+    /**
+     * 最小生成树, kruskal 算法, 从边出发，优先判断权重小的边
+     */
+    public Set<Edge> kruskalMST(Graph graph) {
+        // 用于合并以及判断是否有环
+        UnionFind<Vertex> unionFind = new UnionFind<>(graph.vertexes.values());
+        // 按照权重从小到大保存边
+        PriorityQueue<Edge> priorityQueue = new PriorityQueue<>((e1, e2) -> e1.getWeight()-e2.getWeight());
+        priorityQueue.addAll(graph.edges);
+
+        Set<Edge> result = new HashSet<>();
+
+        while (!priorityQueue.isEmpty()) {
+            Edge edge = priorityQueue.poll();
+            // 判断边的两个顶点是否在同一个集合里
+            if(unionFind.isSameSet(edge.getFrom(), edge.getTo())) {
+                result.add(edge);
+                unionFind.union(edge.getFrom(), edge.getTo());
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 最小生成树, prim 算法, 从点出发，遍历当前所有遍历过的点的 权重最小的边，加入点的集合
+     */
+    public static Set<Edge> primMST(Graph graph) {
+        PriorityQueue<Edge> priorityQueue = new PriorityQueue<>((e1, e2) -> e1.getWeight()-e2.getWeight());
+        HashSet<Vertex> set = new HashSet<>();
+        Set<Edge> result = new HashSet<>();
+
+        // 遍历点，比如森林图
+        for (Vertex vertex : graph.getVertexes().values()) {
+            // 判断当前点是否判断过
+            if (!set.contains(vertex)) {
+                set.add(vertex);
+                // 收集这个点的所有边，权重从小到大排序
+                priorityQueue.addAll(vertex.getEdges());
+
+                // 每次都是选择已有边中权重最小的边，然后判断其 to 点
+                while (!priorityQueue.isEmpty()) {
+                    Edge edge = priorityQueue.poll();
+                    Vertex to = edge.getTo();
+
+                    // 如果 to 点之前没有走过，收集其所有边，加入堆
+                    if (!set.contains(to)) {
+                        set.add(to);
+                        result.add(edge);
+                        priorityQueue.addAll(vertex.getEdges());
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     public static class GraphBuilder {

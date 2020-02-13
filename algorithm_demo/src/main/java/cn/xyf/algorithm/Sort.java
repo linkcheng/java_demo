@@ -5,7 +5,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-/*升序*/
+/**
+ * 升序
+ */
 public class Sort {
     public void bubbleSort(int[] arr) {
         if(arr==null || arr.length<2) {

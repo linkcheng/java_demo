@@ -6,6 +6,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
+/**
+ * 最小化费问题，贪心
+ */
 public class IPO {
     public static class Project {
         public int capital;
