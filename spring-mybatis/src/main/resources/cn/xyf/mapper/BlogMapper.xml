@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper 文件的作用跟 StarUserDaoImpl 实现类一样-->
+<!--绑定对应的 Dao 接口或者 Mapper 接口-->
+<mapper namespace="cn.xyf.mapper.BlogMapper">
+    <resultMap id="blogInfo" type="Blog">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <association property="user"  column="uid" javaType="StarUser" select="getUserById"/>
+    </resultMap>
+
+    <select id="getFulBlogsInfo" resultMap="blogInfo">
+        select * from blog
+    </select>
+
+    <select id="getUserById" parameterType="int" resultType="starUser">
+        select * from mybatis.staruser where id=#{id}
+    </select>
+
+
+    <!--方法二：***使用更直接***-->
+    <select id="getFulBlogsInfo2" resultMap="blogInfo2">
+        select
+            b.id
+            ,b.title
+            ,b.content
+            ,u.name username
+        from blog b
+        left join staruser u
+        on b.uid=u.id
+    </select>
+    
+    <resultMap id="blogInfo2" type="Blog">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <!--复杂类型处理，用于多表关联-->
+        <association property="user" javaType="StarUser">
+            <result property="name" column="username"/>
+        </association>
+
+    </resultMap>
+</mapper>

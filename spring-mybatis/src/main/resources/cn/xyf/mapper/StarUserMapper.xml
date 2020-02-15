@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper 文件的作用跟 StarUserDaoImpl 实现类一样-->
+<!--绑定对应的 Dao 接口或者 Mapper 接口-->
+<mapper namespace="cn.xyf.mapper.StarUserMapper">
+
+    <resultMap id="user" type="StarUser">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="pwd" property="pwd"/>
+    </resultMap>
+
+    <select id="selectUserList" resultMap="user">
+        select * from mybatis.StarUser
+    </select>
+
+    <select id="getUserById" parameterType="int" resultType="starUser">
+        select * from mybatis.staruser where id=#{id}
+    </select>
+
+    <insert id="addUser" parameterType="cn.xyf.pojo.StarUser" >
+        insert into mybatis.staruser (name, pwd)
+        values (#{name}, #{pwd});
+    </insert>
+
+    <update id="updatePwd" parameterType="map">
+        update mybatis.staruser
+        set pwd = #{username}
+        where name = #{password};
+    </update>
+
+    <select id="getUserByLimit" parameterType="map" resultMap="user">
+        select * from mybatis.staruser limit #{startIndex}, #{pageSize}
+    </select>
+
+
+    <!--===================链表查询==================-->
+    <select id="getUserInfoById" resultMap="userInfo">
+        select
+          u.id
+          ,u.name
+          ,b.title
+        from staruser u
+        left join blog b
+        on u.id=b.uid
+        where u.id=#{uid}
+    </select>
+
+    <resultMap id="userInfo" type="StarUser">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="blogs" ofType="Blog">
+            <result property="id" column="id"/>
+            <result property="title" column="title"/>
+            <result property="content" column="content"/>
+        </collection>
+    </resultMap>
+
+</mapper>

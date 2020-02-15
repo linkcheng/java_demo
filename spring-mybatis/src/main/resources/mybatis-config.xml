@@ -3,15 +3,31 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <!--核心配置文件-->
+<!--配置文件的大的配置项有顺序-->
 <configuration>
+    <!--引入外部配置文件，优先使用配置文件中的配置-->
+    <properties resource="db.properties">
+        <property name="user" value="root"/>
+    </properties>
+
+    <settings>
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <typeAliases>
+        <!--<typeAlias type="cn.xyf.pojo.StarUser" alias="StarUser"/>-->
+        <package name="cn.xyf.pojo"/>
+    </typeAliases>
+
     <environments default="dev">
         <environment id="dev">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
-                <property name="username" value="root"/>
-                <property name="password" value="12345678"/>
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
 
@@ -27,6 +43,9 @@
     </environments>
 
     <mappers>
-        <mapper resource="cn/xyf/dao/StarUserMapper.xml"/>
+        <mapper resource="cn/xyf/dao/StarUserDao.xml"/>
+        <!--<mapper resource="cn/xyf/mapper/StarUserMapper.xml"/>-->
+        <mapper class="cn.xyf.mapper.StarUserMapper"/>
+        <mapper class="cn.xyf.mapper.BlogMapper"/>
     </mappers>
 </configuration>
