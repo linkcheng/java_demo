@@ -43,4 +43,17 @@
         </association>
 
     </resultMap>
+
+    <!--动态SQL-->
+    <select id="queryBlog" parameterType="map" resultType="blog">
+        select * from blog
+        <where>
+            <if test="title != null">
+                title like #{title}
+            </if>
+            <if test="content != null">
+                and content like #{content}
+            </if>
+        </where>
+    </select>
 </mapper>

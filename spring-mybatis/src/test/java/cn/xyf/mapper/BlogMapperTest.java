@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class BlogMapperTest {
@@ -53,6 +54,17 @@ public class BlogMapperTest {
 
     }
 
+    @Test
+    public void testQueryBlog() {
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("title", "hello%");
+        map.put("content", "hello%");
+
+        List<Blog> blogs = mapper.queryBlog(map);
+        for (Blog blog : blogs) {
+            System.out.println(blog);
+        }
+    }
 
     @After
     public void teardown() {

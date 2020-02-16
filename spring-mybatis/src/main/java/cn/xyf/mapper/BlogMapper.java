@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BlogMapper {
 
@@ -17,4 +18,6 @@ public interface BlogMapper {
     List<Blog> getFulBlogsInfo();
 
     List<Blog> getFulBlogsInfo2();
+
+    List<Blog> queryBlog(Map map);
 }
