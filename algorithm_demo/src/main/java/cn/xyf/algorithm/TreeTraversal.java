@@ -1,6 +1,8 @@
 package cn.xyf.algorithm;
 
+import java.util.LinkedList;
 import java.util.Stack;
+import java.util.Queue;
 
 /**
  * 树的遍历
@@ -13,6 +15,13 @@ public class TreeTraversal {
 
         public Node(int v) {
             value = v;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "value=" + value +
+                    '}';
         }
     }
 
@@ -164,6 +173,98 @@ public class TreeTraversal {
         }
     }
 
+    /**
+     * 以先序的方式序列化树
+     * 空位置用 # , 节点间间隔用 _
+     */
+    public String serialPreOrderTree(Node root) {
+        if(root == null) {
+            return "#_";
+        }
+
+        String res = root.value + "_";
+        res += serialPreOrderTree(root.left);
+        res += serialPreOrderTree(root.right);
+
+        return res;
+    }
+
+    // ================== 深度优先序列化 ==================
+    /**
+     * 以先序的方式反序列化，把字符串反序列化为树结构
+     * 空位置用 # , 节点间间隔用 _
+     */
+    public Node deserialPreOrderTree(String preStr) {
+        Queue<String> queue = split(preStr);
+        return deserialPreOrderTree(queue);
+    }
+
+    public Node deserialPreOrderTree(Queue<String> queue) {
+        String value = queue.poll();
+        if(value == null || value.equals("#")) {
+            return null;
+        }
+        Node head = new Node(Integer.valueOf(value));
+        head.left = deserialPreOrderTree(queue);
+        head.right = deserialPreOrderTree(queue);
+
+        return head;
+    }
+
+    /**
+     * 按层序列化树
+     */
+    public String serialTreeByLevel(Node root) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        String res = "";
+
+        while (!queue.isEmpty()) {
+            Node t = queue.poll();
+            if(t != null) {
+                queue.add(t.left);
+                queue.add(t.right);
+                res += t.value+"_";
+            } else {
+                res += "#_";
+            }
+        }
+        return res;
+    }
+
+    private Queue<String> split(String str) {
+        String[] strings = str.split("_");
+        Queue<String> queue = new LinkedList<>();
+        for (int i = 0; i < strings.length; i++) {
+            queue.add(strings[i]);
+        }
+        return queue;
+    }
+
+    // ================== 宽度优先序列化 ==================
+
+    /**
+     * 按层序列化树
+     */
+    public Node deserialTreeByLevel(String lelStr) {
+        String[] strings = lelStr.split("_");
+        return deserialTreeByLevel(strings, 0);
+    }
+
+    public Node deserialTreeByLevel(String[] strings, int index) {
+        Node head = null;
+
+        if(index < strings.length && !strings[index].equals("#")) {
+            head = new Node(Integer.valueOf(strings[index]));
+        }
+
+        if(head != null) {
+            head.left = deserialTreeByLevel(strings, index*2 + 1);
+            head.right = deserialTreeByLevel(strings, index*2 + 2);
+        }
+        return head;
+    }
+
     public static void main(String[] args) {
         Node head = new Node(5);
         head.left = new Node(3);
@@ -202,6 +303,25 @@ public class TreeTraversal {
         tt.postOrderNonRecur(head);
         System.out.println();
         tt.postOrderNonRecur2(head);
+        System.out.println();
+
+        // serial
+        System.out.println("============serial in pre order=============");
+        String res = tt.serialPreOrderTree(head);
+        System.out.println(res);
+
+        Node t1 = tt.deserialPreOrderTree(res);
+        System.out.print("pre-order t1: ");
+        tt.preOrderRecur(t1);
+        System.out.println();
+
+        System.out.println("============serial by level=============");
+        res = tt.serialTreeByLevel(head);
+        System.out.println(res);
+
+        t1 = tt.deserialTreeByLevel(res);
+        System.out.print("pre-order t1: ");
+        tt.preOrderRecur(t1);
         System.out.println();
 
     }
