@@ -13,6 +13,8 @@
     <settings>
         <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
         <setting name="logImpl" value="LOG4J"/>
+        <!--开启二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
     </settings>
 
     <typeAliases>

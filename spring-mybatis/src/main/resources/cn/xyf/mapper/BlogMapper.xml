@@ -5,6 +5,8 @@
 <!--mapper 文件的作用跟 StarUserDaoImpl 实现类一样-->
 <!--绑定对应的 Dao 接口或者 Mapper 接口-->
 <mapper namespace="cn.xyf.mapper.BlogMapper">
+    <cache eviction="LRU" flushInterval="60000" />
+
     <resultMap id="blogInfo" type="Blog">
         <result property="id" column="id"/>
         <result property="title" column="title"/>
@@ -18,6 +20,10 @@
 
     <select id="getUserById" parameterType="int" resultType="starUser">
         select * from mybatis.staruser where id=#{id}
+    </select>
+
+    <select id="getBlogById2" parameterType="int" resultType="Blog">
+        select * from blog where id=#{id}
     </select>
 
 

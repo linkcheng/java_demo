@@ -15,6 +15,8 @@ public interface BlogMapper {
     @Select("select * from blog where id=#{id}")
     Blog getBlogById(@Param("id") int id);
 
+    Blog getBlogById2(@Param("id") int id);
+
     List<Blog> getFulBlogsInfo();
 
     List<Blog> getFulBlogsInfo2();

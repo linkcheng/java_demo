@@ -18,7 +18,7 @@ public class BlogMapperTest {
 
     @Before
     public void setUp() {
-        sqlSession = MybatisUtils.getSqlSession();
+        sqlSession = MybatisUtils.getSqlSession(true);
         mapper = sqlSession.getMapper(BlogMapper.class);
     }
 
@@ -37,6 +37,21 @@ public class BlogMapperTest {
     }
 
     @Test
+    public void testGetBlogById2() {
+        // 测试二级缓存
+        SqlSession sqlSession1 = MybatisUtils.getSqlSession(true);
+        BlogMapper mapper1 = sqlSession1.getMapper(BlogMapper.class);
+
+        Blog blog1 = mapper1.getBlogById2(1);
+        System.out.println(blog1);
+        sqlSession1.close();
+
+
+        Blog blog = mapper.getBlogById2(1);
+        System.out.println(blog);
+    }
+
+    @Test
     public void testGetFulBlogsInfo() {
         List<Blog> info = mapper.getFulBlogsInfo();
         for (Blog blog : info) {
@@ -51,7 +66,6 @@ public class BlogMapperTest {
         for (Blog blog : info) {
             System.out.println(blog);
         }
-
     }
 
     @Test
