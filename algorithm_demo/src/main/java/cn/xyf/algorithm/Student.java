@@ -1,24 +1,25 @@
 package cn.xyf.algorithm;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Check {
-    int value() default 99;
-    int min() default 0;
-    int max() default 100;
-}
+import java.lang.annotation.*;
+import java.lang.reflect.Field;
 
 
-
-class Student {
+@DBTable("db_student")
+public class Student {
+    @DBField(col_name = "stu_id", col_type = "int", col_length = 10)
     private int id;
+    @DBField(col_name = "stu_name", col_type = "varchar", col_length = 32)
     private String name;
+    @DBField(col_name = "stu_age", col_type = "int", col_length = 10)
     private int age;
+
+    public Student() {}
+
+    public Student(int id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
 
     public int getId() {
         return id;
@@ -52,6 +53,21 @@ class Student {
                 ", age=" + age +
                 '}';
     }
+
+
+    public static void main(String[] args) throws NoSuchFieldException {
+        Student student = new Student(1, "张三", 18);
+
+        Class c1 = student.getClass();
+
+        DBTable dbTable = (DBTable)c1.getAnnotation(DBTable.class);
+        System.out.println(dbTable.value());
+
+        Field name = c1.getDeclaredField("name");
+        DBField dbField = name.getAnnotation(DBField.class);
+        System.out.println(dbField.col_name());
+
+    }
 }
 
 
@@ -67,7 +83,7 @@ class Student {
 @interface DBField{
     String col_name();
     String col_type();
-    String 
+    int col_length();
 }
 
 

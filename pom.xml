@@ -12,6 +12,8 @@
         <module>spring-ioc</module>
         <module>spring-aop</module>
         <module>mybatis_demo</module>
+        <module>spring-mybatis</module>
+        <module>algorithm_demo</module>
     </modules>
 
     <properties>
