@@ -4,20 +4,24 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--处理映射器
+        BeanNameUrlHandlerMapping 根据 bean 的 id 匹配
+     -->
     <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
 
+    <!--处理适配器-->
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
 
-    <!--视图解析器:DispatcherServlet给他的ModelAndView-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="InternalResourceViewResolver">
-        <!--前缀-->
+    <!--视图解析器：可以配置其他模板引擎 thymeleaf, freemarker-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="internalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
-        <!--后缀-->
         <property name="suffix" value=".jsp"/>
     </bean>
 
-
-    <!--Handler-->
+    <!--BeanNameUrlHandlerMapping 根据 bean 的 id 匹配-->
     <bean id="/hello" class="cn.xyf.controller.HelloController"/>
+
+
+
 
 </beans>

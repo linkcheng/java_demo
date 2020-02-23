@@ -9,17 +9,21 @@
     <servlet>
         <servlet-name>springmvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <!--关联一个springmvc的配置文件:【servlet-name】-servlet.xml-->
+        <!-- DispatchServlet 绑定 spring 的配置文件，文件名格式尽量为 [servlet-name]-servlet.xml -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:springmvc-servlet.xml</param-value>
         </init-param>
-        <!--启动级别-1-->
+        <!--设置启动级别-->
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!--/ 匹配所有的请求；（不包括.jsp）-->
-    <!--/* 匹配所有的请求；（包括.jsp）-->
+    <!--
+        /: 只匹配请求，不匹配 jsp 页面
+        /*: 匹配请求和 jsp 页面
+        / 匹配所有的请求；（不包括.jsp）
+        /* 匹配所有的请求；（包括.jsp）
+    -->
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
         <url-pattern>/</url-pattern>
