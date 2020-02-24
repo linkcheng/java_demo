@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xyf.mapper.BookMapper">
+    <select id="select" resultType="Book">
+        select * from ssm.book
+    </select>
+
+    <select id="selectById" resultType="Book">
+        select * from ssm.book where id=#{bid}
+    </select>
+
+    <insert id="insert" parameterType="Book">
+        insert into ssm.book (book_name, book_count, detail)
+        values (#{bookName}, #{bookCount}, #{detail})
+    </insert>
+
+    <delete id="delete" parameterType="_int">
+        delete from ssm.book where id=#{bid}
+    </delete>
+
+    <update id="update" parameterType="Book">
+        update ssm.book
+        set book_name=#{bookName}
+            ,book_count=#{bookCount}
+            ,detail=#{detail}
+        where id=#{id}
+    </update>
+
+</mapper>
