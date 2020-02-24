@@ -6,10 +6,13 @@
 
     <!--处理映射器
         BeanNameUrlHandlerMapping 根据 bean 的 id 匹配
+        可不配，使用默认值
      -->
     <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
 
-    <!--处理适配器-->
+    <!--处理适配器，
+        可不配，使用默认值
+    -->
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
 
     <!--视图解析器：可以配置其他模板引擎 thymeleaf, freemarker-->
@@ -20,8 +23,5 @@
 
     <!--BeanNameUrlHandlerMapping 根据 bean 的 id 匹配-->
     <bean id="/hello" class="cn.xyf.controller.HelloController"/>
-
-
-
 
 </beans>
