@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <!--1.注册DispatcherServlet-->
+    <servlet>
+        <servlet-name>springssm</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--DispatchServlet 绑定 spring 的配置文件 -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!--使用总的spring 配置文件-->
+            <param-value>classpath:applicationContext.xml</param-value>
+        </init-param>
+        <!--设置启动级别-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!--
+        /: 只匹配请求，不匹配 jsp 页面
+        /*: 匹配请求和 jsp 页面
+        / 匹配所有的请求；（不包括.jsp）
+        /* 匹配所有的请求；（包括.jsp）
+    -->
+    <servlet-mapping>
+        <servlet-name>springssm</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+    <!--2. 乱码过滤-->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <!--3. session 过期时间配置-->
+    <session-config>
+        <session-timeout>15</session-timeout>
+    </session-config>
 </web-app>
