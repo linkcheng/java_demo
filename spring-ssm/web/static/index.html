@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 外部样式 -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 内部样式 */
+        h1{
+            color: blueviolet;
+        }
+
+        h1.info{
+            color: white;
+            background: blueviolet;
+            border-radius: 5px;
+        }
+
+        p.info{
+            color: aquamarine;
+            font-size: 36px;
+            background: darkcyan;
+        }
+
+        #style{
+            color: brown;
+        }
+
+    </style>
+</head>
+<body>
+    <!--优先级：就近原则，哪一部分代码离得近，哪一部分生效-->
+
+    <h1 style="color: blue">行内样式</h1>   <!-- 行内样式 -->
+    <h1 id="style">内部样式</h1>
+    <h1 class="info">外部样式</h1>
+
+    <p class="info">
+        p内的元素
+    </p>
+</body>
+</html>
