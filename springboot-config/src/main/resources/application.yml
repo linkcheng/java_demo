@@ -1,0 +1,37 @@
+person:
+  name: 查尔斯堡
+  age: 18
+  happy: false
+  birth: 2000/01/01
+  maps:
+    k1: v1
+    k2: v2
+  lists:
+    - Java
+    - Python
+  dog:
+    name: 旺财
+    age: 2
+
+
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active: dev
+
+
+---
+server:
+  port: 8082
+spring:
+  profiles: dev
+
+
+---
+server:
+  port: 8083
+spring:
+  profiles: test
+
