@@ -1,0 +1,1 @@
+{"META-INF.resource", "b.js"}
