@@ -10,9 +10,9 @@ import java.util.List;
 
 @Service
 public class BookServiceImpl implements BookService {
-    @Autowired
     private BookMapper bookMapper;
 
+    @Autowired
     public void setBookMapper(BookMapper bookMapper) {
         this.bookMapper = bookMapper;
     }
