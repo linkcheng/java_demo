@@ -8,8 +8,8 @@
         https://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="cn.xyf"/>
-    <!-- component-scan 会添加 annotation-config-->
-    <!--<context:annotation-config/>-->
+    <!-- component-scan 会添加 annotation-properties-->
+    <!--<context:annotation-properties/>-->
 
     <bean id="dog1" class="cn.xyf.service.Dog">
         <property name="name" value="狗子"/>

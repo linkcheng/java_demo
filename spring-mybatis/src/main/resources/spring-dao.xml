@@ -25,7 +25,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!--绑定mybatis配置文件-->
-        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="configLocation" value="classpath:mybatis-properties.xml"/>
         <property name="mapperLocations" value="classpath:cn/xyf/mapper/StarUserMapper.xml"/>
         <!--添加事务工厂-->
         <!--<property name="transactionFactory" ref="transactionFactory"/>-->
@@ -55,8 +55,8 @@
     </tx:advice>
 
     <!--配置事务切入-->
-    <aop:config>
+    <aop:properties>
         <aop:pointcut id="txPointCut" expression="execution(* cn.xyf.mapper.*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
-    </aop:config>
+    </aop:properties>
 </beans>

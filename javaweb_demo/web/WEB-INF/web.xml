@@ -10,9 +10,9 @@
         <param-value>jdbc:mysql://127.0.0.1:3306/mybatis</param-value>
     </context-param>
 
-    <session-config>
+    <session-properties>
         <session-timeout>1</session-timeout>
-    </session-config>
+    </session-properties>
 
     <!--1. 注册 servlet-->
     <servlet>

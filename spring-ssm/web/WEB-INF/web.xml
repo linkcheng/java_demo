@@ -47,7 +47,7 @@
 
 
     <!--3. session 过期时间配置-->
-    <session-config>
+    <session-properties>
         <session-timeout>15</session-timeout>
-    </session-config>
+    </session-properties>
 </web-app>

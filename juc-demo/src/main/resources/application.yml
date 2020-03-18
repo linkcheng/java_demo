@@ -1,0 +1,19 @@
+executor:
+  pool:
+    corePoolSize: 4
+    maxPoolSize: 20
+    keepAliveSeconds: 300
+    queueCapacity: 50
+    threadNamePrefix: MyExecutor-
+
+spring:
+  datasource:
+    username: root
+    password: 12345678
+    url: jdbc:mysql://localhost:3306/mybatis?useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  type-aliases-package: cn.xyf.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
