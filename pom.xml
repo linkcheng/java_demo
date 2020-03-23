@@ -19,6 +19,8 @@
         <module>springmvc-annotation</module>
         <module>spring-ssm</module>
         <module>spring-intercepter</module>
+        <module>spring-ioc2</module>
+        <module>spring-aop2</module>
     </modules>
 
     <properties>

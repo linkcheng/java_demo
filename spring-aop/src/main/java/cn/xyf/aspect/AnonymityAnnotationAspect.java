@@ -4,6 +4,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.annotation.Aspect;
 
+
 @Aspect
 public class AnonymityAnnotationAspect  {
 
@@ -35,9 +36,12 @@ public class AnonymityAnnotationAspect  {
     public void around(ProceedingJoinPoint jp) throws Throwable {
         System.out.println("============环绕前============");
         System.out.println("============签名:"+jp.getSignature()+"============");
+        long begin = System.currentTimeMillis();
         //执行目标方法proceed
         Object proceed = jp.proceed();
+        long end = System.currentTimeMillis();
         System.out.println("============环绕后============");
+        System.out.println(jp.getSignature()+"执行时长="+(end-begin));
         System.out.println(proceed);
     }
 }
