@@ -30,3 +30,4 @@ dependency-reduced-pom.xml
 *.idea
 *.log
 
+dump.rdb
