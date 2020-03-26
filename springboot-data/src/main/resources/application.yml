@@ -1,3 +1,6 @@
+server:
+  port: 8888
+
 spring:
   datasource:
     username: root
@@ -27,11 +30,20 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
   # redis 相关配置
   redis:
     host: 127.0.0.1
     port: 6379
     database: 0
+
+# mongodb 配置
+  # 服务启动：mongod --auth
+  # 客户端连接：mongo --host localhost --port 27017  --authenticationDatabase admin  -u admin -p 12345678
+  data:
+    mongodb:
+      authentication-database: statistics
+      uri: mongodb://super:12345678@localhost:27017/statistics
 
 mybatis:
   type-aliases-package: cn.xyf.pojo
