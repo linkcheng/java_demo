@@ -4,23 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.java.test</groupId>
-    <artifactId>java_test</artifactId>
+    <groupId>cn.xyf</groupId>
+    <artifactId>java_demo</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>spring-ioc</module>
         <module>spring-aop</module>
         <module>mybatis_demo</module>
-        <module>spring-mybatis</module>
-        <module>algorithm_demo</module>
         <module>springMVC</module>
         <module>javaweb_demo</module>
         <module>springmvc-annotation</module>
         <module>spring-ssm</module>
         <module>spring-intercepter</module>
-        <module>spring-ioc2</module>
-        <module>spring-aop2</module>
     </modules>
 
     <properties>
