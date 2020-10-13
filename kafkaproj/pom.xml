@@ -12,7 +12,7 @@
         <commons.lang3.version>3.9</commons.lang3.version>
         <log4j.version>1.2.17</log4j.version>
         <slf4j.version>1.7.30</slf4j.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <lombok.version>1.18.10</lombok.version>
         <kafka.scala.version>2.12</kafka.scala.version>
         <kafka.version>2.3.0</kafka.version>
